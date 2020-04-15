@@ -8,11 +8,11 @@ import java.util.ArrayList;
 
 public class PolygonRenderer implements IComponent
 {
-    ArrayList<Vec2> verticies;
+    private Polygon polygon;
 
-    public PolygonRenderer(ArrayList<Vec2> verts)
+    public PolygonRenderer(Polygon p)
     {
-        this.verticies = verts;
+        polygon = p;
     }
 
     @Override
@@ -25,6 +25,15 @@ public class PolygonRenderer implements IComponent
     public void addedToParent(GameObject o)
     {
 
+    }
+
+    public Polygon getPolygon()
+    {
+        return polygon;
+    }
+    public void setPolygon(Polygon p)
+    {
+        polygon = p;
     }
 
     @Override

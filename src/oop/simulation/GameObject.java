@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author Kevin Dai
  */
-public abstract class GameObject
+public class GameObject
 {
     private String internalName;
     private Scene scene;
@@ -69,6 +69,7 @@ public abstract class GameObject
         if(getComponent(c.getClass()) != null && c.isUnique())
             return; // TODO: Failure
         this.components.add(c);
+        c.addedToParent(this);
     }
 
     /**

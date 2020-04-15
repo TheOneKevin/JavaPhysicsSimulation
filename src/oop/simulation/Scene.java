@@ -102,7 +102,7 @@ public class Scene extends World
      * @param name Name of GameObject
      * @return GameObject if found, null otherwise.
      */
-    public GameObject getGameObject(String name)
+    public GameObject getGameObjects(String name)
     {
         return this.gameObjectHashMap.getOrDefault(name, null);
     }
@@ -112,7 +112,7 @@ public class Scene extends World
      * @param filter Takes in a GameObject and returns a Boolean to decide whether to include or exclude object.
      * @return ArrayList of GameObjects which satisfies the given filter
      */
-    public ArrayList<GameObject> getGameObject(Function<GameObject, Boolean> filter)
+    public ArrayList<GameObject> getGameObjects(Function<GameObject, Boolean> filter)
     {
         ArrayList<GameObject> obj = new ArrayList<>();
         this.gameObjectHashMap.forEach((k, v) -> {
