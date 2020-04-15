@@ -18,5 +18,9 @@ public abstract class Camera extends GameObject
         super(name);
     }
 
+    /**
+     * Draws current scene to buffer
+     * @param g Buffer to draw to
+     */
     public abstract void renderToBuffer(GreenfootImage g);
 }

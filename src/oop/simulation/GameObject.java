@@ -40,21 +40,34 @@ public abstract class GameObject
      * @param c Class of component to get
      * @return ArrayList of valid components
      */
-    public ArrayList<IComponent> getComponentsByClass(Class<IComponent> c)
+    public ArrayList<IComponent> getComponents(Class<? extends IComponent> c)
     {
         ArrayList<IComponent> res = new ArrayList<>();
-        this.components.forEach((v) -> {
+        for(IComponent v : this.components)
             if(v.getClass() == c) res.add(v);
-        });
         return res;
     }
 
     /**
+     * Get first component matching class
+     * @param c Class of component to get
+     * @return First component of a given class
+     */
+    public IComponent getComponent(Class<? extends IComponent> c)
+    {
+        for(IComponent v : this.components)
+            if(v.getClass() == c) return v;
+        return null;
+    }
+
+    /**
      * Adds a component to the GameObject
-     * @param c
+     * @param c Component to add
      */
     public void addComponent(IComponent c)
     {
+        if(getComponent(c.getClass()) != null && c.isUnique())
+            return; // TODO: Failure
         this.components.add(c);
     }
 

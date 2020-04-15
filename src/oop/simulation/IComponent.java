@@ -18,4 +18,10 @@ public interface IComponent
      * @param o Parent
      */
     void addedToParent(GameObject o);
+
+    /**
+     *
+     * @return
+     */
+    boolean isUnique();
 }
