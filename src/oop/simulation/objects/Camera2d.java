@@ -31,9 +31,8 @@ public class Camera2d extends Camera
         g.clear();
         g.setColor(Color.BLACK);
         g.fill();
-        ArrayList<GameObject> gameObjects = getScene().getGameObjects((v) -> {
-            return v.getComponent(PolygonRenderer.class) != null;
-        });
+
+        ArrayList<GameObject> gameObjects = getScene().getGameObjects((v) ->  v.getComponent(PolygonRenderer.class) != null);
         for(var obj : gameObjects)
         {
             PolygonRenderer pg = (PolygonRenderer)obj.getComponent(PolygonRenderer.class);
@@ -48,6 +47,7 @@ public class Camera2d extends Camera
                 xs[i] = (int)Math.round(vec2s.get(i).getX());
                 ys[i] = (int)Math.round(vec2s.get(i).getY());
             }
+
             g.setColor(Color.GREEN);
             g.drawPolygon(xs, ys, vec2s.size());
         }

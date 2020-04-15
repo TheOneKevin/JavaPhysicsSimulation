@@ -20,11 +20,18 @@ public class MyWorld extends Scene
         this.addGameObject(cam);
         this.setActiveCamera("camera1");
 
-        Polygon p = new Polygon(new Vec2[]{
+        Polygon p1 = new Polygon(new Vec2[]{
                 new Vec2(10, 10), new Vec2(100,100), new Vec2(200,100)
         });
-        GameObject g = new GameObject("myPeePee");
-        g.addComponent(new PolygonRenderer(p));
-        this.addGameObject(g);
+        GameObject g1 = new GameObject("g1");
+        g1.addComponent(new PolygonRenderer(p1));
+        this.addGameObject(g1);
+
+        Polygon p2 = new Polygon(new Vec2[]{
+            new Vec2(20, 20), new Vec2(20, 30), new Vec2(30,30), new Vec2(30, 20)
+        });
+        GameObject g2 = new GameObject("g2");
+        g2.addComponent(new PolygonRenderer(p2));
+        this.addGameObject(g2);
     }
 }

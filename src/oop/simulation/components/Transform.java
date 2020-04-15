@@ -3,14 +3,13 @@ package oop.simulation.components;
 import oop.simulation.GameObject;
 import oop.simulation.IComponent;
 
-public class PolygonRenderer implements IComponent
+public class Transform implements IComponent
 {
-    private Polygon polygon;
     private GameObject parentObj;
 
-    public PolygonRenderer(Polygon p)
+    public Transform()
     {
-        polygon = p;
+
     }
 
     @Override
@@ -22,17 +21,7 @@ public class PolygonRenderer implements IComponent
     @Override
     public void addedToParent(GameObject o)
     {
-        parentObj = o;
-    }
-
-    public Polygon getPolygon()
-    {
-        return polygon;
-    }
-
-    public void setPolygon(Polygon p)
-    {
-        polygon = p;
+        this.parentObj = o;
     }
 
     @Override
