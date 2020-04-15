@@ -1,20 +1,18 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import oop.simulation.Scene;
+import oop.simulation.objects.DummyCamera;
 
 /**
- * Write a description of class MyWorld here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Example main world
  */
-public class MyWorld extends World
+public class MyWorld extends Scene
 {
-    /**
-     * Constructor for objects of class MyWorld.
-     * 
-     */
     public MyWorld()
-    {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1);
+    {
+        super(600, 400);
+
+        // Create a camera now
+        DummyCamera cam = new DummyCamera("camera1");
+        this.addGameObject(cam);
+        this.setActiveCamera("camera1");
     }
 }

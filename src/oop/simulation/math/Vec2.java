@@ -1,4 +1,4 @@
-package oop.clownfest.math;
+package oop.simulation.math;
 
 /**
  * 2-tuples in R^2 and their operations.

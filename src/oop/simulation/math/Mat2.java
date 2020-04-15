@@ -1,4 +1,4 @@
-package oop.clownfest.math;
+package oop.simulation.math;
 
 /**
  * Matrix representations of linear transformations T.
