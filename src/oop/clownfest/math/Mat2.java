@@ -9,7 +9,7 @@ package oop.clownfest.math;
  */
 public class Mat2
 {
-    double[][] mat;
+    private double[][] mat;
 
     public Mat2(double a, double b, double c, double d)
     {

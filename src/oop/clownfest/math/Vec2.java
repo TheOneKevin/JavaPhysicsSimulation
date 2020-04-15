@@ -32,6 +32,11 @@ public class Vec2
         this.y=u.y;
     }
 
+    public static Vec2 add(Vec2 u, Vec2 v)
+    {
+        return new Vec2(u.x+v.x,u.y+v.y);
+    }
+
     public void invert()
     {
         this.x=-this.x;
