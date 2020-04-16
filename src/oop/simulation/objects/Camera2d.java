@@ -48,7 +48,7 @@ public class Camera2d extends Camera
             // Do model space -> world space transformations
             MatN modelMatrix = ((Transform) obj.getComponent(Transform.class)).getScaleMatrix();
             for(var v : p.getVertices())
-                vec2s.add(new Vec2(VecN.getCartFromHomo(VecN.matrixTransform(VecN.getHomoCoords(v), modelMatrix))));
+                vec2s.add(new Vec2(VecN.getCartFromHomo(VecN.matrixMultiply(VecN.getHomoCoords(v), modelMatrix))));
 
             int[] xs = new int[vec2s.size()];
             int[] ys = new int[vec2s.size()];
