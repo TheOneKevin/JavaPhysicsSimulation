@@ -105,7 +105,7 @@ public class VecN {
      * @param u An input VecN object.
      * @return The converted Cartesian VecN object.
      */
-    public static VecN getCartFromHomo(VecN u) {
+    public static VecN wDivide(VecN u) {
         // given (x1, x2, ..., xn, w) return (x1/w, ..., xn/w)
         assert (u.getDimension() >= 2);
         double w = u.getEntryAt(u.getDimension());

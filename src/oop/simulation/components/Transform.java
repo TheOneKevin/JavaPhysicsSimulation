@@ -58,9 +58,12 @@ public class Transform implements IComponent
         return new MatN(T);
     }
 
-    public MatN getTransformMatrix()
+    public static MatN computeModelViewMatrix(GameObject g)
     {
-        return null; // trans * rot * scale
+        MatN r = MatN.identityN(3);
+        for(var t : g.getComponents(Transform.class))
+            r.matrixMultiply(MatN.matrixMultiply(t.getTranslationMatrix(), MatN.matrixMultiply(t.getRotationMatrix(), t.getScaleMatrix())));
+        return r;
     }
 
     @Override

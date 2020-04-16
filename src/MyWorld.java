@@ -18,6 +18,7 @@ public class MyWorld extends Scene
 
         // Create a camera now
         Camera2d cam = new Camera2d("camera1");
+        cam.addComponent(new Transform(10, 10, 1, 1));
         this.addGameObject(cam);
         this.setActiveCamera("camera1");
 
@@ -26,14 +27,7 @@ public class MyWorld extends Scene
         });
         GameObject g1 = new GameObject("g1");
         g1.addComponent(new PolygonRenderer(p1));
-        g1.addComponent(new Transform(0, 0, 0.5, 1));
+        g1.addComponent(new Transform(10, 0, 0.5, 1));
         this.addGameObject(g1);
-
-        Polygon p2 = new Polygon(new Vec2[]{
-            new Vec2(20, 20), new Vec2(20, 30), new Vec2(30,30), new Vec2(30, 20)
-        });
-        GameObject g2 = new GameObject("g2");
-        g2.addComponent(new PolygonRenderer(p2));
-        this.addGameObject(g2);
     }
 }

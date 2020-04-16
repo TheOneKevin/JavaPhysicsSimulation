@@ -40,11 +40,11 @@ public class GameObject
      * @param c Class of component to get
      * @return ArrayList of valid components
      */
-    public ArrayList<IComponent> getComponents(Class<? extends IComponent> c)
+    public <T extends IComponent> ArrayList<T> getComponents(Class<T> c)
     {
-        ArrayList<IComponent> res = new ArrayList<>();
+        ArrayList<T> res = new ArrayList<>();
         for(IComponent v : this.components)
-            if(v.getClass() == c) res.add(v);
+            if(v.getClass() == c) res.add((T) v);
         return res;
     }
 
@@ -53,10 +53,10 @@ public class GameObject
      * @param c Class of component to get
      * @return First component of a given class
      */
-    public IComponent getComponent(Class<? extends IComponent> c)
+    public <T extends IComponent> T getComponent(Class<T> c)
     {
         for(IComponent v : this.components)
-            if(v.getClass() == c) return v;
+            if(v.getClass() == c) return (T) v;
         return null;
     }
 

@@ -39,17 +39,21 @@ public class Camera2d extends Camera
         ArrayList<GameObject> gameObjects = getScene().getGameObjects((v) ->
             v.getComponent(PolygonRenderer.class) != null && v.getComponent(Transform.class) != null);
 
+        // Prepare for camera transforms
+        MatN viewMatrix = Transform.computeModelViewMatrix(this);
+
         for(var obj : gameObjects)
         {
-            PolygonRenderer pg = (PolygonRenderer)obj.getComponent(PolygonRenderer.class);
+            PolygonRenderer pg = obj.getComponent(PolygonRenderer.class);
             Polygon p = pg.getPolygon();
             ArrayList<Vec2> vec2s = new ArrayList<>();
 
-            // Do model space -> world space transformations
-            MatN modelMatrix = ((Transform) obj.getComponent(Transform.class)).getScaleMatrix();
+            // Do model space -> view space transformations by computing (view * modelWorld) * vertex
+            MatN modelWorldViewMatrix = MatN.matrixMultiply(viewMatrix, Transform.computeModelViewMatrix(obj));
             for(var v : p.getVertices())
-                vec2s.add(new Vec2(VecN.getCartFromHomo(VecN.matrixMultiply(VecN.getHomoCoords(v), modelMatrix))));
+                vec2s.add(new Vec2(VecN.wDivide(VecN.matrixMultiply(VecN.getHomoCoords(v), modelWorldViewMatrix))));
 
+            // Put it in a form that GreenFoot can understand
             int[] xs = new int[vec2s.size()];
             int[] ys = new int[vec2s.size()];
 
