@@ -45,6 +45,7 @@ public class Camera2d extends Camera
             Polygon p = pg.getPolygon();
             ArrayList<Vec2> vec2s = new ArrayList<>();
 
+            // Do model space -> world space transformations
             MatN modelMatrix = ((Transform) obj.getComponent(Transform.class)).getScaleMatrix();
             for(var v : p.getVertices())
                 vec2s.add(new Vec2(VecN.getCartFromHomo(VecN.matrixTransform(VecN.getHomoCoords(v), modelMatrix))));
