@@ -63,6 +63,31 @@ public class MatN {
         }
     }
 
+    public void setRowData(int row, VecN v) {
+        if (row > 0 && row < data.length + 1 && v.getDimension() == getNumberOfColumns()) {
+            data[row - 1] = v.getArrayData();
+        } else {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    public void setColumnData(int column, VecN v) {
+        if (column > 0 && column < data[0].length + 1 && v.getDimension() == getNumberOfRows()) {
+            for (int i = 0; i < data.length; i++)
+                data[i][column - 1] = v.getEntryAt(i+1);
+        } else {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    public void setEntryAt(int row, int col, double v)
+    {
+        if (col > 0 && col < data[0].length + 1 && row > 0 && row < data.length + 1)
+            data[row][col] = v;
+        else
+            throw new IndexOutOfBoundsException();
+    }
+
     public int getNumberOfRows() {
         return data.length;
     }
@@ -73,5 +98,18 @@ public class MatN {
 
     public double[][] getArrayData() {
         return data;
+    }
+
+    public static MatN identityN(int n)
+    {
+        if(n > 0)
+        {
+            double[][] data = new double[n][n];
+            for(int i = 0; i < n; i++)
+                data[i][i] = 1;
+            return new MatN(data);
+        }
+        else
+            throw new IndexOutOfBoundsException();
     }
 }

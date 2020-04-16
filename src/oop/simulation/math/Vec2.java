@@ -2,6 +2,8 @@ package oop.simulation.math;
 
 import oop.simulation.beans.Property;
 
+import java.util.Arrays;
+
 public class Vec2 extends VecN
 {
     public final Property<Double> x = Property.get(() -> this.data[0]).set(v -> this.data[0] = v);
@@ -10,5 +12,10 @@ public class Vec2 extends VecN
     public Vec2(double x, double y)
     {
         super(x, y);
+    }
+
+    public Vec2(VecN v)
+    {
+        super(Arrays.copyOf(v.getArrayData(), 2));
     }
 }

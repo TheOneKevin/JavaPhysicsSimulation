@@ -1,5 +1,7 @@
 package oop.simulation.math;
 
+import java.util.Arrays;
+
 /**
  * n-tuples in R^n and their operations.
  * <p>
@@ -55,8 +57,30 @@ public class VecN {
         }
     }
 
-    public static double getEntryAt(VecN u, int position) {
-        return u.getEntryAt(position);
+    public static VecN getHomoCoords(VecN u)
+    {
+        // given (x1, x2, ..., xn) return (x1, ..., xn, 1)
+        double[] v = Arrays.copyOf(u.data, u.getDimension() + 1);
+        v[v.length-1] = 1;
+        return new VecN(v);
+    }
+
+    public static VecN getCartFromHomo(VecN u)
+    {
+        // given (x1, x2, ..., xn, w) return (x1/w, ..., xn/w)
+        assert(u.getDimension() >= 2);
+        double w = u.getEntryAt(u.getDimension());
+        double[] v = new double[u.getDimension() - 1];
+        for(int i = 0; i < v.length; i++)
+            v[i] = u.data[i] / w;
+        return new VecN(v);
+    }
+
+    public static VecN matrixTransform(VecN v, MatN T)
+    {
+        var u = v.clone();
+        u.matrixTransform(T);
+        return u;
     }
 
     public void add(VecN u) {
@@ -82,6 +106,14 @@ public class VecN {
     public double getEntryAt(int position) {
         if (position > 0 && position < data.length + 1) {
             return data[position - 1];
+        } else {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    public void setEntryAt(int position, double v) {
+        if (position > 0 && position < data.length + 1) {
+            data[position - 1] = v;
         } else {
             throw new IndexOutOfBoundsException();
         }
@@ -118,5 +150,10 @@ public class VecN {
 
     public void set(double ... arr) {
         data = arr.clone();
+    }
+
+    public VecN clone()
+    {
+        return new VecN(data);
     }
 }

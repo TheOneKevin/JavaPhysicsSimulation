@@ -2,6 +2,7 @@ import oop.simulation.GameObject;
 import oop.simulation.Scene;
 import oop.simulation.components.Polygon;
 import oop.simulation.components.PolygonRenderer;
+import oop.simulation.components.Transform;
 import oop.simulation.math.Vec2;
 import oop.simulation.objects.Camera2d;
 import oop.simulation.objects.DummyCamera;
@@ -25,6 +26,7 @@ public class MyWorld extends Scene
         });
         GameObject g1 = new GameObject("g1");
         g1.addComponent(new PolygonRenderer(p1));
+        g1.addComponent(new Transform(0, 0, 0.5, 1));
         this.addGameObject(g1);
 
         Polygon p2 = new Polygon(new Vec2[]{
