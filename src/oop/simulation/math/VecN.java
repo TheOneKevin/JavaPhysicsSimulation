@@ -9,30 +9,26 @@ package oop.simulation.math;
  * @author Kai Qi Hao (nova-terra)
  */
 public class VecN {
-    private double[] data;
+    protected double[] data;
 
     public VecN(int dimension) {
         if (dimension > 0) {
             data = new double[dimension];
-            for (double i : data) {
-                i = 0;
-            }
         } else {
             throw new IndexOutOfBoundsException("Dimensions must be greater than 0.");
         }
     }
 
-    public VecN(double[] inputArray) {
+    public VecN(double ... inputArray) {
         if (inputArray != null) {
-            data = new double[inputArray.length];
-            data = inputArray;
+            data = inputArray.clone();
         } else {
             throw new NullPointerException();
         }
     }
 
     public VecN(VecN other) {
-        data = other.data;
+        data = other.data.clone();
     }
 
     public static VecN add(VecN u, VecN v) {
@@ -92,7 +88,7 @@ public class VecN {
     }
 
     public double[] getArrayData() {
-        return data;
+        return data.clone();
     }
 
     public void matrixTransform(MatN T) {
@@ -101,7 +97,7 @@ public class VecN {
             for (int i = 0; i < T.getNumberOfRows(); i++) {
                 v[i] = getEuclideanInnerProduct(T.getRowData(i + 1), this);
             }
-            copyArray(v);
+            this.data = v;
         } else {
             throw new ArithmeticException();
         }
@@ -120,7 +116,7 @@ public class VecN {
         return output;
     }
 
-    private void copyArray(double[] arr) {
-        data = arr;
+    public void set(double ... arr) {
+        data = arr.clone();
     }
 }

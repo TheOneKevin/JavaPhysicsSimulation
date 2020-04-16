@@ -29,4 +29,10 @@ public class Transform implements IComponent
     {
         return false;
     }
+
+    @Override
+    public void update()
+    {
+        
+    }
 }

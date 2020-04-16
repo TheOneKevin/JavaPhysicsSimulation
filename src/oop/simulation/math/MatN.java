@@ -11,7 +11,7 @@ package oop.simulation.math;
  * @author Kai Qi Hao (nova-terra)
  */
 public class MatN {
-    private double[][] data;
+    protected double[][] data;
 
     public MatN(int m, int n) {
         if (m > 0 && n > 0) {

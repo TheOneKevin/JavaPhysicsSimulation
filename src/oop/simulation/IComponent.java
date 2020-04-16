@@ -20,8 +20,15 @@ public interface IComponent
     void addedToParent(GameObject o);
 
     /**
-     *
-     * @return
+     * Determines whether multiple components of this type may
+     * be attached to a GameObject
+     * @return True if the above statement is true, false otherwise.
      */
     boolean isUnique();
+
+    /**
+     * Called once per act() in the order the component
+     * is added to the GameObject.
+     */
+    void update();
 }

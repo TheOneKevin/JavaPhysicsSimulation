@@ -44,8 +44,8 @@ public class Camera2d extends Camera
 
             for(int i = 0; i < vec2s.size(); i++)
             {
-                xs[i] = (int)Math.round(vec2s.get(i).getX());
-                ys[i] = (int)Math.round(vec2s.get(i).getY());
+                xs[i] = (int)Math.round(vec2s.get(i).x.get());
+                ys[i] = (int)Math.round(vec2s.get(i).y.get());
             }
 
             g.setColor(Color.GREEN);

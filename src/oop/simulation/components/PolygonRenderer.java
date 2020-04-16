@@ -40,4 +40,10 @@ public class PolygonRenderer implements IComponent
     {
         return false;
     }
+
+    @Override
+    public void update()
+    {
+
+    }
 }
