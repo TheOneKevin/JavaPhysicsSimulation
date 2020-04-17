@@ -333,8 +333,10 @@ public class VecN {
      */
     public void normalize() {
         double l = Math.sqrt(getEuclideanInnerProduct(this, this));
-        for (int i = 0; i < data.length; i++) {
-            data[i] /= l;
+        if(l!=0) {
+            for (int i = 0; i < data.length; i++) {
+                data[i] /= l;
+            }
         }
     }
 
