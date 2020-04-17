@@ -153,7 +153,7 @@ public class VecN {
     /**
      * Returns the entry value of a n-tuple at a specified position.
      *
-     * @param v An input VecN object.
+     * @param v        An input VecN object.
      * @param position The specified position.
      * @return The entry value.
      */
@@ -164,8 +164,8 @@ public class VecN {
     /**
      * Returns a n-tuple with modified entry value at specified position.
      *
-     * @param v An input VecN object.
-     * @param c The value to be modified to.
+     * @param v        An input VecN object.
+     * @param c        The value to be modified to.
      * @param position The specified position.
      * @return A VecN object with modified entry value.
      */
@@ -194,6 +194,23 @@ public class VecN {
         var u = v.clone();
         u.scalarMultiply(c);
         return u;
+    }
+
+    public static VecN normalize(VecN n) {
+        VecN v = n.clone();
+        v.normalize();
+        return v;
+    }
+
+    /**
+     * Returns whether 2 n-tuples are orthogonal to each other.
+     *
+     * @param u A n-tuple.
+     * @param v Another n-tuple.
+     * @return A boolean value.
+     */
+    public static boolean isNormalTo(Vec3 u, Vec3 v) {
+        return u.isNormalTo(v);
     }
 
     /**
@@ -309,6 +326,26 @@ public class VecN {
         }
         str += ")";
         return str;
+    }
+
+    /**
+     * Normalizes the n-tuple.
+     */
+    public void normalize() {
+        double l = Math.sqrt(getEuclideanInnerProduct(this, this));
+        for (int i = 0; i < data.length; i++) {
+            data[i] /= l;
+        }
+    }
+
+    /**
+     * Returns whether a n-tuple is orthogonal to another n-tuple.
+     *
+     * @param v A n-tuple.
+     * @return A boolean value.
+     */
+    public boolean isNormalTo(Vec3 v) {
+        return VecN.getEuclideanInnerProduct(this, v) == 0;
     }
 
     /**
