@@ -1,22 +1,34 @@
 package oop.simulation;
 
 import greenfoot.*;
+import oop.simulation.components.BehaviourComponent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Function;
 
 /**
- * Scene adds the base foundation support for GameObjects, Cameras and DeltaT.
+ * Scene contains all the working logic for GameObjects and their Components.
+ * The scene is what interprets the information held within the Components
+ * of GameObjects - it drives the entire game forwards.
+ * <p>
+ * See {@link GameObject} {@link IComponent}
  *
  * @author Kevin Dai
  */
 public class Scene extends World
 {
-    private long prevTime, deltaTime;
-    private Camera mainCamera;
+    private long prevTime;
+
+    private Camera activeCamera;
     private HashMap<String, GameObject> gameObjectHashMap;
     private GreenfootImage renderBuffer;
+
+    /**
+     * Time passed between this frame and the last one
+     * in nanoseconds.
+     */
+    protected long deltaTime;
 
     // Why not?
     private static final Font errFont = new Font("Sans Serif", 20);
@@ -45,9 +57,9 @@ public class Scene extends World
 
         // Init dt counter
         this.prevTime = System.nanoTime();
-        this.act();
+        this.render();
         // Then add camera
-        this.mainCamera = camera;
+        this.activeCamera = camera;
     }
 
     @Override
@@ -57,20 +69,12 @@ public class Scene extends World
         deltaTime = System.nanoTime() - prevTime;
         prevTime = System.nanoTime();
 
-        if(mainCamera == null)
-        {
-            getBackground().setColor(Color.BLACK);
-            getBackground().fill();
-            getBackground().setColor(Color.WHITE);
-            getBackground().setFont(errFont);
-            getBackground().drawString("This scene does not have a valid camera!", 10, 30);
-            return;
-        }
+        // Apply behaviour components
+        for(var g : gameObjectHashMap.values())
+            for(var c : g.getComponents(BehaviourComponent.class))
+                c.act(g);
 
-        // Is buffering needed?
-        mainCamera.renderToBuffer(renderBuffer);
-        this.setBackground(renderBuffer);
-        repaint();
+        this.render();
     }
 
     @Override
@@ -132,6 +136,25 @@ public class Scene extends World
             throw new IllegalArgumentException("Object of name '" + name + "' does not exist!");
         else if(!(camera instanceof Camera))
             throw new IllegalArgumentException("Object of name '" + name + "' (" + camera.getClass() + ") is not an instanceof Camera!");
-        this.mainCamera = (Camera) camera;
+        this.activeCamera = (Camera) camera;
+    }
+
+    private void render()
+    {
+        // Render!
+        if(activeCamera == null)
+        {
+            getBackground().setColor(Color.BLACK);
+            getBackground().fill();
+            getBackground().setColor(Color.WHITE);
+            getBackground().setFont(errFont);
+            getBackground().drawString("This scene does not have an active camera (yet)!", 10, 30);
+            return;
+        }
+
+        // Is buffering needed?
+        activeCamera.renderToBuffer(renderBuffer);
+        this.setBackground(renderBuffer);
+        repaint();
     }
 }

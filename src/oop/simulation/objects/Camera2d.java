@@ -4,17 +4,19 @@ import greenfoot.Color;
 import greenfoot.GreenfootImage;
 import oop.simulation.Camera;
 import oop.simulation.GameObject;
-import oop.simulation.components.Polygon;
 import oop.simulation.components.PolygonRenderer;
 import oop.simulation.components.Transform;
 import oop.simulation.math.MatN;
+import oop.simulation.math.Polygon;
 import oop.simulation.math.Vec2;
 import oop.simulation.math.VecN;
 
 import java.util.ArrayList;
 
 /**
- * Example Camera implementation
+ * Simple 2D Camera Implementation
+ * @author Kevin Dai
+ * @author Mustafa M.
  */
 public class Camera2d extends Camera
 {
@@ -31,11 +33,12 @@ public class Camera2d extends Camera
     @Override
     public void renderToBuffer(GreenfootImage g)
     {
+        // Clear buffer
         g.clear();
         g.setColor(Color.BLACK);
         g.fill();
 
-        // Render only if GameObject has PolygonRenderer AND Transform
+        // Render only if GameObject has IRenderer (is render-able)
         ArrayList<GameObject> gameObjects = getScene().getGameObjects((v) ->
             v.getComponent(PolygonRenderer.class) != null && v.getComponent(Transform.class) != null);
 

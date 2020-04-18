@@ -2,11 +2,11 @@ package oop.simulation.components;
 
 import oop.simulation.GameObject;
 import oop.simulation.IComponent;
+import oop.simulation.math.Polygon;
 
 public class PolygonRenderer implements IComponent
 {
     private Polygon polygon;
-    private GameObject parentObj;
 
     public PolygonRenderer(Polygon p)
     {
@@ -14,15 +14,9 @@ public class PolygonRenderer implements IComponent
     }
 
     @Override
-    public GameObject parent()
+    public boolean isUnique()
     {
-        return parentObj;
-    }
-
-    @Override
-    public void addedToParent(GameObject o)
-    {
-        parentObj = o;
+        return true;
     }
 
     public Polygon getPolygon()
@@ -33,17 +27,5 @@ public class PolygonRenderer implements IComponent
     public void setPolygon(Polygon p)
     {
         polygon = p;
-    }
-
-    @Override
-    public boolean isUnique()
-    {
-        return false;
-    }
-
-    @Override
-    public void update()
-    {
-
     }
 }

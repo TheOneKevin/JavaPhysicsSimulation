@@ -12,8 +12,6 @@ import oop.simulation.math.Vec2;
  */
 public class Transform implements IComponent
 {
-    private GameObject parentObj;
-
     private Vec2 translation;
     private double rotation = 0;
     private Vec2 scaling;
@@ -67,26 +65,9 @@ public class Transform implements IComponent
     }
 
     @Override
-    public GameObject parent()
-    {
-        return parentObj;
-    }
-
-    @Override
-    public void addedToParent(GameObject o)
-    {
-        this.parentObj = o;
-    }
-
-    @Override
     public boolean isUnique()
     {
         return false;
     }
 
-    @Override
-    public void update()
-    {
-
-    }
 }

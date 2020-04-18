@@ -5,8 +5,10 @@ import oop.simulation.beans.*;
 import java.util.ArrayList;
 
 /**
- * GameObject is the replacement for Actors
- * TODO: Should we extend Actor? No.
+ * GameObject is the replacement for Actors.
+ * GameObjects are fundamentally different from Actors.
+ * They only <b>STORE</b> information in the form of Components (see {@link IComponent}).
+ * GameObjects contain no logic.
  *
  * @author Kevin Dai
  */
@@ -42,7 +44,7 @@ public class GameObject
      */
     public <T extends IComponent> ArrayList<T> getComponents(Class<T> c)
     {
-        ArrayList<T> res = new ArrayList<>();
+        ArrayList<T> res = new ArrayList<>(this.components.size());
         for(IComponent v : this.components)
             if(v.getClass() == c) res.add((T) v);
         return res;
@@ -69,7 +71,6 @@ public class GameObject
         if(getComponent(c.getClass()) != null && c.isUnique())
             return; // TODO: Failure
         this.components.add(c);
-        c.addedToParent(this);
     }
 
     /**

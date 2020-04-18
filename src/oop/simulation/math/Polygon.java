@@ -1,4 +1,4 @@
-package oop.simulation.components;
+package oop.simulation.math;
 
 import oop.simulation.math.Vec2;
 
