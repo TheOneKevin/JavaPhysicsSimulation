@@ -8,6 +8,7 @@ import oop.simulation.components.PolygonRenderer;
 import oop.simulation.components.Transform;
 import oop.simulation.math.Vec2;
 import oop.simulation.objects.Camera2d;
+import oop.simulation.physics2d.collision.MprCollision;
 
 /**
  * Example main world
@@ -24,14 +25,25 @@ public class MyWorld extends Scene
         this.addGameObject(cam);
         this.setActiveCamera("camera1");
 
-        Polygon p1 = new Polygon(new Vec2[]{
-                new Vec2(10, 10), new Vec2(10,110), new Vec2(110,110)
+        Polygon t1 = new Polygon(new Vec2[]{
+            new Vec2(0, 0), new Vec2(100, 0), new Vec2(100, 100)
         });
+
+        Polygon t2 = new Polygon(new Vec2[]{
+            new Vec2(10, 30), new Vec2(125,140), new Vec2(0,140)
+        });
+
         GameObject g1 = new GameObject("g1");
-        g1.addComponent(new PolygonRenderer(p1));
-        g1.addComponent(new PolygonCollider(p1));
-        g1.addComponent(new Transform(10, 10, 1, 1));
-        g1.addComponent(new BehaviourComponent(g -> {
+        g1.addComponent(new PolygonRenderer(t1));
+        g1.addComponent(new PolygonCollider(t1));
+        g1.addComponent(new Transform(0, 0, 1, 1));
+
+        GameObject g2 = new GameObject("g2");
+        g2.addComponent(new PolygonRenderer(t2));
+        g2.addComponent(new PolygonCollider(t2));
+        g2.addComponent(new Transform(0, 0, 1, 1));
+
+        /*g1.addComponent(new BehaviourComponent(g -> {
             var v = new Vec2(0, 0);
             // Just testing
             if(Greenfoot.isKeyDown("w"))
@@ -45,7 +57,12 @@ public class MyWorld extends Scene
             v.scalarMultiply(100 * this.deltaTime / 1000000000.0); // multiply by time, convert ns to s
             var T = g.getComponent(Transform.class);
             T.Position.get().add(v); // move the damn thing
-        }));
+            T.Rotation.set(Math.toRadians(45));
+        }));*/
+
         this.addGameObject(g1);
+        this.addGameObject(g2);
+
+        System.out.println(MprCollision.collide(g1.getComponent(PolygonCollider.class), g2.getComponent(PolygonCollider.class)));
     }
 }

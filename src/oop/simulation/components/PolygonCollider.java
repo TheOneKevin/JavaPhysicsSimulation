@@ -1,12 +1,16 @@
 package oop.simulation.components;
 
-import oop.simulation.GameObject;
 import oop.simulation.IComponent;
 import oop.simulation.math.Vec2;
 import oop.simulation.math.Polygon;
-import oop.simulation.physics2d.collision.ISupportMappable;
+import oop.simulation.physics2d.collision.IShape;
 
-public class PolygonCollider implements IComponent, ISupportMappable
+/**
+ * Enables collisions between colliders
+ *
+ * @author Kevin Dai
+ */
+public class PolygonCollider implements IComponent, IShape
 {
     private Polygon polygon;
 
@@ -37,6 +41,12 @@ public class PolygonCollider implements IComponent, ISupportMappable
             }
         }
         return out;
+    }
+
+    @Override
+    public Vec2 getCentroid()
+    {
+        return polygon.getCentroid();
     }
 
     public Polygon getPolygon()

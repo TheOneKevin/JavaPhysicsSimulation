@@ -1,23 +1,29 @@
 package oop.simulation.components;
 
 import oop.simulation.GameObject;
+import oop.simulation.IBehaviour;
 import oop.simulation.IComponent;
 import oop.simulation.beans.Property;
 
 import java.util.function.Consumer;
 
+/**
+ * Allows attaching behaviours to GameObjects
+ *
+ * @author Kevin Dai
+ */
 public class BehaviourComponent implements IComponent
 {
-    private Consumer<GameObject> privateScript;
+    private IBehaviour privateScript;
 
-    public final Property<Consumer<GameObject>> Script = Property.get(() -> privateScript).set(v -> privateScript = v);
+    public final Property<IBehaviour> Script = Property.get(() -> privateScript).set(v -> privateScript = v);
 
     /**
      * Constructor for attaching behaviours to GameObjects.
      *
      * @param script The method to call every act()
      */
-    public BehaviourComponent(Consumer<GameObject> script)
+    public BehaviourComponent(IBehaviour script)
     {
         this.Script.set(script);
     }
@@ -35,6 +41,6 @@ public class BehaviourComponent implements IComponent
      */
     public void act(GameObject g)
     {
-        privateScript.accept(g);
+        privateScript.act(g);
     }
 }

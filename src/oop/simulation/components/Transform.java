@@ -8,6 +8,7 @@ import oop.simulation.math.Vec2;
 
 /**
  * Transform component describes object space to world space transformations.
+ *
  * @author Kevin Dai
  */
 public class Transform implements IComponent
