@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 /**
  * n-tuples in R^n and their operations.
- * <p>
- * <p>
+ * <br>
+ * <br>
  * will add documentations this week
  *
  * @author Kai Qi Hao (nova-terra)
@@ -190,10 +190,10 @@ public class VecN {
      *
      * @param c The specified scalar.
      */
-    public static VecN scalarMultiply(VecN v, double c) {
+    public static <T extends VecN> T scalarMultiply(T v, double c) {
         var u = v.clone();
         u.scalarMultiply(c);
-        return u;
+        return (T) u;
     }
 
     public static VecN normalize(VecN n) {

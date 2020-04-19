@@ -28,7 +28,7 @@ public class Scene extends World
      * Time passed between this frame and the last one
      * in nanoseconds.
      */
-    protected long deltaTime;
+    protected double deltaTime;
 
     // Why not?
     private static final Font errFont = new Font("Sans Serif", 20);
@@ -66,7 +66,7 @@ public class Scene extends World
     public void act()
     {
         // Compute dt
-        deltaTime = System.nanoTime() - prevTime;
+        deltaTime = (System.nanoTime() - prevTime) / 1000000000.0;
         prevTime = System.nanoTime();
 
         // Component updates first
@@ -79,13 +79,13 @@ public class Scene extends World
                 c.update(g);
             }
         }
-
+        this.render();
         // Apply behaviour updates last
         for(var g : gameObjectHashMap.values())
             for (var c : g.getComponents(BehaviourComponent.class))
                 c.update(g);
 
-        this.render();
+        // this.render();
     }
 
     @Override

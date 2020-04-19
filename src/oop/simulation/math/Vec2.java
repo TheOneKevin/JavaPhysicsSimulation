@@ -24,11 +24,23 @@ public class Vec2 extends VecN {
         super(Arrays.copyOf(v.getArrayData(), 2));
     }
 
+    public Vec2 add(Vec2 b)
+    {
+        this.data[0] += b.data[0];
+        this.data[1] += b.data[1];
+        return this;
+    }
+
     public Vec2 subtract(Vec2 b)
     {
         this.data[0] -= b.data[0];
         this.data[1] -= b.data[1];
         return this;
+    }
+
+    public static Vec2 add(Vec2 a, Vec2 b)
+    {
+        return a.clone().add(b);
     }
 
     public static Vec2 subtract(Vec2 a, Vec2 b)

@@ -2,9 +2,9 @@ package oop.simulation.math;
 
 /**
  * Matrix representations of T.
- * T: R^n -> R^m.
- * <p>
- * <p>
+ * T: R^n -&gt; R^m.
+ * <br>
+ * <br>
  * also I will add documentations later this week
  *
  * @author Kai Qi Hao (nova-terra)

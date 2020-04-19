@@ -7,6 +7,7 @@ import oop.simulation.GameObject;
 import oop.simulation.components.PolygonCollider;
 import oop.simulation.components.PolygonRenderer;
 import oop.simulation.components.Transform;
+import oop.simulation.components.UiOverlayComponent;
 import oop.simulation.math.MatN;
 import oop.simulation.math.Polygon;
 import oop.simulation.math.Vec2;
@@ -72,6 +73,12 @@ public class Camera2d extends Camera
 
             var c = obj.getComponent(PolygonCollider.class).getCentroidWorld();
             g.drawOval((int) Math.round(c.x.get()), (int) Math.round(c.y.get()), 3, 3);
+        }
+
+        for(var ui : this.getComponents(UiOverlayComponent.class))
+        {
+            g.drawImage(ui.getTexture(), 0, 0);
+            ui.clear();
         }
     }
 }

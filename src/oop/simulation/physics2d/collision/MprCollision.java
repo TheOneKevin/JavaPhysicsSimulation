@@ -34,7 +34,7 @@ public class MprCollision
         return false;
     }
 
-    public static boolean collide(IShape A, IShape B)
+    public static boolean collide(IShape A, IShape B, Manifold m)
     {
         int maxIter = 0;
 
@@ -48,34 +48,76 @@ public class MprCollision
         // Figure 1c
         Vec2 n   = Vec2.negate(v0);
         Vec2 v1  = Geometry.getMinkowskiDifference(A, B, n);
+        Vec2 v1n = n.clone();
         if(v1.dot(n) <= 0) return false; // Origin out of range of support, terminate early
 
         // Figure 1d
         n = normalTowardsOrigin(v1, v0);
         Vec2 v2 = Geometry.getMinkowskiDifference(A, B, n);
+        Vec2 v2n = n.clone();
         if(v2.dot(n) <= 0) return false;
 
         // Phase 2: Portal Refinement
         while(true)
         {
+            // Figure 1g, get normal, find support
             n = normalTowardsOrigin(v2, v1);
             if(!rayIntersectPortal(v0, v2, v1))
                 n.negate();
-
             Vec2 v3 = Geometry.getMinkowskiDifference(A, B, n);
             if(v3.dot(n) <= 0) return false;
 
-            if(Vec2.subtract(v3, v2).dot(n) <= 0.001 || maxIter++ > 20)
-                return true;
+            // Terminate.
+            if(Vec2.subtract(v3, v2).dot(n) <= 0.0001 || maxIter++ > 15)
+            {
+                // ** This routine has been ported over from the Blaze MPR code. ** //
+                // Which side of the line does the origin lie on? (test -v1 dot (v2-v1))
+                Vec2 ba = Vec2.subtract(v2, v1);
+                double t = - v1.dot(ba);
+                Vec2 p;
+                if(t <= 0)
+                {
+                    t = 0;
+                    p = v1;
+                }
+                else
+                {
+                    double len = Vec2.getEuclideanInnerProduct(ba, ba);
+                    if(t >= len)
+                    {
+                        t = 1;
+                        p = v2;
+                    }
+                    else
+                    {
+                        t /= len;
+                        p = Vec2.add(v1, Vec2.scalarMultiply(ba, t));
+                    }
+                }
 
+                Vec2 v11 = A.getSupportWorld(Vec2.negate(v1n));
+                Vec2 v12 = B.getSupportWorld(v1n);
+                Vec2 v21 = A.getSupportWorld(Vec2.negate(v2n));
+                Vec2 v22 = B.getSupportWorld(v2n);
+
+                m.Point1 = Vec2.scalarMultiply(v11, 1 - t).add(Vec2.scalarMultiply(v21, t));
+                m.Point2 = Vec2.scalarMultiply(v12, 1 - t).add(Vec2.scalarMultiply(v22, t));
+                m.Penetration = p;
+
+                return true;
+            }
+
+            // Figure 1h and 1i, discard unused point.
             if(Geometry.originInTriangle(v0, v1, v3))
             {
                 v2 = v3;
+                v2n = n.clone();
                 continue;
             }
             else if(Geometry.originInTriangle(v0, v2, v3))
             {
                 v1 = v3;
+                v1n = n.clone();
                 continue;
             }
 
