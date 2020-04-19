@@ -26,7 +26,10 @@ public class MyWorld extends Scene
         this.setActiveCamera("camera1");
 
         Polygon t1 = new Polygon(new Vec2[]{
-            new Vec2(0, 0), new Vec2(100, 0), new Vec2(100, 100)
+            new Vec2(0, 0),
+            new Vec2(100, 0),
+            new Vec2(100, 100),
+            new Vec2(0, 100)
         });
 
         Polygon t2 = new Polygon(new Vec2[]{
@@ -43,26 +46,37 @@ public class MyWorld extends Scene
         g2.addComponent(new PolygonCollider(t2));
         g2.addComponent(new Transform(0, 0, 1, 1));
 
-        /*g1.addComponent(new BehaviourComponent(g -> {
-            var v = new Vec2(0, 0);
+        g1.addComponent(new BehaviourComponent(g -> {
+            // Ah, here we go...
+            System.out.println(
+                MprCollision.collide(g1.getComponent(PolygonCollider.class), g2.getComponent(PolygonCollider.class)) + " " +
+                MprCollision.collide(g2.getComponent(PolygonCollider.class), g1.getComponent(PolygonCollider.class))
+            );
+
             // Just testing
+            var v = new Vec2(0, 0);
             if(Greenfoot.isKeyDown("w"))
-                v.y.set(v.y.get() - 1);
-            if(Greenfoot.isKeyDown("s"))
                 v.y.set(v.y.get() + 1);
+            if(Greenfoot.isKeyDown("s"))
+                v.y.set(v.y.get() - 1);
             if(Greenfoot.isKeyDown("a"))
                 v.x.set(v.x.get() - 1);
             if(Greenfoot.isKeyDown("d"))
                 v.x.set(v.x.get() + 1);
             v.scalarMultiply(100 * this.deltaTime / 1000000000.0); // multiply by time, convert ns to s
+
+            // Get Transform
             var T = g.getComponent(Transform.class);
             T.Position.get().add(v); // move the damn thing
-            T.Rotation.set(Math.toRadians(45));
-        }));*/
+
+            // Rotate the damn thing
+            if(Greenfoot.isKeyDown("left"))
+                T.Rotation.set(T.Rotation.get() - 0.05);
+            if(Greenfoot.isKeyDown("right"))
+                T.Rotation.set(T.Rotation.get() + 0.05);
+        }));
 
         this.addGameObject(g1);
         this.addGameObject(g2);
-
-        System.out.println(MprCollision.collide(g1.getComponent(PolygonCollider.class), g2.getComponent(PolygonCollider.class)));
     }
 }

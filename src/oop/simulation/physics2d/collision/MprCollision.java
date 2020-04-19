@@ -42,16 +42,17 @@ public class MprCollision
 
         // Phase 1: Portal Discovery
         // Figure 1b
-        Vec2 v0  = B.getCentroid().subtract(A.getCentroid());
+        Vec2 v0  = Vec2.subtract(B.getCentroidWorld(), A.getCentroidWorld());
+        v0.x.set(v0.x.get() + 0.00001);
 
         // Figure 1c
         Vec2 n   = Vec2.negate(v0);
-        Vec2 v1  = B.getSupport(n).subtract(A.getSupport(v0)); // Basically Geometry.getMinkowskiDifference
+        Vec2 v1  = Geometry.getMinkowskiDifference(A, B, n); // Basically Geometry.getMinkowskiDifference
         if(v1.dot(n) <= 0) return false; // Origin out of range of support, terminate early
 
         // Figure 1d
         n = normalTowardsOrigin(v1, v0);
-        Vec2 v2  = B.getSupport(n).subtract(A.getSupport(v0));
+        Vec2 v2 = Geometry.getMinkowskiDifference(A, B, n);
         if(v2.dot(n) <= 0) return false;
 
         // Phase 2: Portal Refinement
@@ -62,9 +63,9 @@ public class MprCollision
                 n.negate();
 
             Vec2 v3 = Geometry.getMinkowskiDifference(A, B, n);
-            if(v2.dot(n) <= 0) return false;
+            if(v3.dot(n) <= 0) return false;
 
-            if(Vec2.subtract(v3, v2).dot(n) <= 0.00001 || maxIter++ > 10)
+            if(Vec2.subtract(v3, v2).dot(n) <= 0.001 || maxIter++ > 20)
                 return true;
 
             if(Geometry.originInTriangle(v0, v1, v3))

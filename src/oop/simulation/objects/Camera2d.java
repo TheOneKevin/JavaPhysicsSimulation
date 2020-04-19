@@ -4,6 +4,7 @@ import greenfoot.Color;
 import greenfoot.GreenfootImage;
 import oop.simulation.Camera;
 import oop.simulation.GameObject;
+import oop.simulation.components.PolygonCollider;
 import oop.simulation.components.PolygonRenderer;
 import oop.simulation.components.Transform;
 import oop.simulation.math.MatN;
@@ -43,7 +44,7 @@ public class Camera2d extends Camera
             v.getComponent(PolygonRenderer.class) != null && v.getComponent(Transform.class) != null);
 
         // Prepare for camera transforms
-        MatN viewMatrix = Transform.computeModelViewMatrix(this);
+        MatN viewMatrix = Transform.computeModelWorldMatrix(this);
 
         for(var obj : gameObjects)
         {
@@ -52,9 +53,9 @@ public class Camera2d extends Camera
             ArrayList<Vec2> vec2s = new ArrayList<>();
 
             // Do model space -> view space transformations by computing (view * modelWorld) * vertex
-            MatN modelWorldViewMatrix = MatN.matrixMultiply(viewMatrix, Transform.computeModelViewMatrix(obj));
+            MatN modelWorldViewMatrix = MatN.matrixMultiply(viewMatrix, Transform.computeModelWorldMatrix(obj));
             for(var v : p.getVertices())
-                vec2s.add(new Vec2(VecN.wDivide(VecN.matrixMultiply(VecN.getHomoCoords(v), modelWorldViewMatrix))));
+                vec2s.add(Vec2.wTransform(modelWorldViewMatrix, v));
 
             // Put it in a form that GreenFoot can understand
             int[] xs = new int[vec2s.size()];
@@ -68,6 +69,9 @@ public class Camera2d extends Camera
 
             g.setColor(Color.GREEN);
             g.drawPolygon(xs, ys, vec2s.size());
+
+            var c = obj.getComponent(PolygonCollider.class).getCentroidWorld();
+            g.drawOval((int) Math.round(c.x.get()), (int) Math.round(c.y.get()), 3, 3);
         }
     }
 }

@@ -1,5 +1,6 @@
 package oop.simulation.components;
 
+import oop.simulation.GameObject;
 import oop.simulation.IComponent;
 import oop.simulation.math.Polygon;
 
@@ -22,6 +23,12 @@ public class PolygonRenderer implements IComponent
     public boolean isUnique()
     {
         return true;
+    }
+
+    @Override
+    public void update(GameObject g)
+    {
+
     }
 
     public Polygon getPolygon()

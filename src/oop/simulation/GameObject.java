@@ -50,6 +50,13 @@ public class GameObject
         return res;
     }
 
+    public IComponent[] getComponents()
+    {
+        IComponent[] arr = new IComponent[this.components.size()];
+        this.components.toArray(arr);
+        return arr;
+    }
+
     /**
      * Get first component matching class
      * @param c Class of component to get

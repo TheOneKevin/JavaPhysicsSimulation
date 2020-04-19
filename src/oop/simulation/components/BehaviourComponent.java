@@ -5,8 +5,6 @@ import oop.simulation.IBehaviour;
 import oop.simulation.IComponent;
 import oop.simulation.beans.Property;
 
-import java.util.function.Consumer;
-
 /**
  * Allows attaching behaviours to GameObjects
  *
@@ -39,7 +37,8 @@ public class BehaviourComponent implements IComponent
      *
      * @param g GameObject currently being executed.
      */
-    public void act(GameObject g)
+    @Override
+    public void update(GameObject g)
     {
         privateScript.act(g);
     }

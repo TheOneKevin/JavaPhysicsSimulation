@@ -16,4 +16,10 @@ public interface IComponent
      * @return True if the above statement is true, false otherwise.
      */
     boolean isUnique();
+
+    /**
+     * Contains very very simple logic run once per act()
+     * @param g GameObject currently being run
+     */
+    void update(GameObject g);
 }

@@ -57,7 +57,7 @@ public class Transform implements IComponent
         return new MatN(T);
     }
 
-    public static MatN computeModelViewMatrix(GameObject g)
+    public static MatN computeModelWorldMatrix(GameObject g)
     {
         MatN r = MatN.identityN(3);
         for(var t : g.getComponents(Transform.class))
@@ -69,6 +69,12 @@ public class Transform implements IComponent
     public boolean isUnique()
     {
         return false;
+    }
+
+    @Override
+    public void update(GameObject g)
+    {
+
     }
 
 }

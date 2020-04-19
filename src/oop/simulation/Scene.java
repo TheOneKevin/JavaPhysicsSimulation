@@ -69,10 +69,21 @@ public class Scene extends World
         deltaTime = System.nanoTime() - prevTime;
         prevTime = System.nanoTime();
 
-        // Apply behaviour components
+        // Component updates first
         for(var g : gameObjectHashMap.values())
-            for(var c : g.getComponents(BehaviourComponent.class))
-                c.act(g);
+        {
+            for (var c : g.getComponents())
+            {
+                if (c instanceof BehaviourComponent)
+                    continue;
+                c.update(g);
+            }
+        }
+
+        // Apply behaviour updates last
+        for(var g : gameObjectHashMap.values())
+            for (var c : g.getComponents(BehaviourComponent.class))
+                c.update(g);
 
         this.render();
     }

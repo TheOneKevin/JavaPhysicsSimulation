@@ -76,4 +76,9 @@ public class Vec2 extends VecN {
         data[0] = t;
         return this;
     }
+
+    public static Vec2 wTransform(MatN T, Vec2 v)
+    {
+        return new Vec2(VecN.wDivide(VecN.matrixMultiply(VecN.getHomoCoords(v), T)));
+    }
 }
