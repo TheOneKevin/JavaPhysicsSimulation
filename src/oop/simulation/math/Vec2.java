@@ -4,6 +4,14 @@ import oop.simulation.beans.Property;
 
 import java.util.Arrays;
 
+/**
+ * "Simple" wrapper around VecN. Some items are reimplemented
+ * for speed and extensibility (interop b/w VecN and Vec2).
+ *
+ * TODO: Fully integrate with VecN at some point in the future.
+ *
+ * @author Kevin Dai
+ */
 public class Vec2 extends VecN {
     public final Property<Double> x = Property.get(() -> this.data[0]).set(v -> this.data[0] = v);
     public final Property<Double> y = Property.get(() -> this.data[1]).set(v -> this.data[1] = v);
@@ -25,13 +33,7 @@ public class Vec2 extends VecN {
 
     public static Vec2 subtract(Vec2 a, Vec2 b)
     {
-        // a - b
         return a.clone().subtract(b);
-    }
-
-    public Vec2 clone()
-    {
-        return new Vec2(this.data[0], this.data[1]);
     }
 
     public static Vec2 negate(Vec2 d)
@@ -56,11 +58,6 @@ public class Vec2 extends VecN {
         return this.data[0] * b.data[0] + this.data[1] * b.data[1];
     }
 
-    public static double cross(Vec2 a, Vec2 b)
-    {
-        return a.data[0] * b.data[1] - a.data[1] * b.data[0];
-    }
-
     public Vec2 rotateLeft90()
     {
         double t = data[1];
@@ -80,5 +77,10 @@ public class Vec2 extends VecN {
     public static Vec2 wTransform(MatN T, Vec2 v)
     {
         return new Vec2(VecN.wDivide(VecN.matrixMultiply(VecN.getHomoCoords(v), T)));
+    }
+
+    public Vec2 clone()
+    {
+        return new Vec2(this.data[0], this.data[1]);
     }
 }

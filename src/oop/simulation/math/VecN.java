@@ -241,11 +241,14 @@ public class VecN {
      * Multiplies the n-tuple by a specified scalar.
      *
      * @param c The specified scalar.
+     * @param <T> Type of vector
+     * @return The vector (this) cast to T
      */
-    public void scalarMultiply(double c) {
+    public <T extends VecN> T scalarMultiply(double c) {
         for (int i = 0; i < data.length; i++) {
             data[i] *= c;
         }
+        return (T) this;
     }
 
     /**

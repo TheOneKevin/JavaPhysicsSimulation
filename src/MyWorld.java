@@ -25,16 +25,16 @@ public class MyWorld extends Scene
         this.addGameObject(cam);
         this.setActiveCamera("camera1");
 
-        Polygon t1 = new Polygon(new Vec2[]{
+        Polygon t1 = new Polygon(
             new Vec2(0, 0),
             new Vec2(100, 0),
             new Vec2(100, 100),
             new Vec2(0, 100)
-        });
+        );
 
-        Polygon t2 = new Polygon(new Vec2[]{
+        Polygon t2 = new Polygon(
             new Vec2(10, 30), new Vec2(125,140), new Vec2(0,140)
-        });
+        );
 
         GameObject g1 = new GameObject("g1");
         g1.addComponent(new PolygonRenderer(t1));
@@ -49,8 +49,7 @@ public class MyWorld extends Scene
         g1.addComponent(new BehaviourComponent(g -> {
             // Ah, here we go...
             System.out.println(
-                MprCollision.collide(g1.getComponent(PolygonCollider.class), g2.getComponent(PolygonCollider.class)) + " " +
-                MprCollision.collide(g2.getComponent(PolygonCollider.class), g1.getComponent(PolygonCollider.class))
+                MprCollision.collide(g1.getComponent(PolygonCollider.class), g2.getComponent(PolygonCollider.class))
             );
 
             // Just testing

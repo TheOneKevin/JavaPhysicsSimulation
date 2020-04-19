@@ -47,7 +47,7 @@ public class MprCollision
 
         // Figure 1c
         Vec2 n   = Vec2.negate(v0);
-        Vec2 v1  = Geometry.getMinkowskiDifference(A, B, n); // Basically Geometry.getMinkowskiDifference
+        Vec2 v1  = Geometry.getMinkowskiDifference(A, B, n);
         if(v1.dot(n) <= 0) return false; // Origin out of range of support, terminate early
 
         // Figure 1d

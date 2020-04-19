@@ -1,8 +1,15 @@
 package oop.simulation.math;
 
-import com.sun.javafx.geom.Vec3d;
 import oop.simulation.beans.Property;
 
+/**
+ * "Simple" wrapper around VecN. Some items are reimplemented
+ * for speed and extensibility (interop b/w VecN and Vec2). It's
+ * all horribly complex. I'm probably doing it wrong.
+ *
+ * @author Kevin Dai
+ * @author Kai Qi Hao (nova-terra)
+ */
 public class Vec3 extends VecN {
     public final Property<Double> x = Property.get(() -> this.data[0]).set(v -> this.data[0] = v);
     public final Property<Double> y = Property.get(() -> this.data[1]).set(v -> this.data[1] = v);
