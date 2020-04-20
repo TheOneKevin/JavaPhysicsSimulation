@@ -60,14 +60,24 @@ public class Vec2 extends VecN {
         return this;
     }
 
+
     public double cross(Vec2 b)
     {
         return this.data[0] * b.data[1] - this.data[1] * b.data[0];
     }
 
+
     public double dot(Vec2 b)
     {
         return this.data[0] * b.data[0] + this.data[1] * b.data[1];
+    }
+
+
+    public Vec3 getCrossProduct(Vec2 v){
+        Vec3 w = new Vec3(data[0],data[1],0);
+        Vec3 x = new Vec3(v.data[0],v.data[1],0);
+        w.getCrossProduct(x);
+        return w;
     }
 
     public Vec2 rotateLeft90()
@@ -95,4 +105,5 @@ public class Vec2 extends VecN {
     {
         return new Vec2(this.data[0], this.data[1]);
     }
+
 }
