@@ -1,11 +1,9 @@
 package oop.simulation.components;
 
 import oop.simulation.GameObject;
-import oop.simulation.IComponent;
 import oop.simulation.math.MatN;
 import oop.simulation.math.Vec2;
 import oop.simulation.math.Polygon;
-import oop.simulation.math.VecN;
 import oop.simulation.physics2d.collision.IShape;
 
 /**
@@ -13,12 +11,11 @@ import oop.simulation.physics2d.collision.IShape;
  *
  * @author Kevin Dai
  */
-public class PolygonCollider implements IComponent, IShape
+public class PolygonCollider implements IShape
 {
     private Polygon polygon;
 
     // Cached
-    private Vec2 centroid;
     private Vec2 centroidWorld;
     private MatN T;
 
@@ -37,8 +34,7 @@ public class PolygonCollider implements IComponent, IShape
     public void update(GameObject g)
     {
         T = Transform.computeModelWorldMatrix(g);
-        centroid = polygon.getCentroid();
-        centroidWorld = Vec2.wTransform(T, centroid);
+        centroidWorld = Vec2.wTransform(T, new Vec2(0, 0));
     }
 
     @Override
@@ -57,12 +53,6 @@ public class PolygonCollider implements IComponent, IShape
             }
         }
         return out;
-    }
-
-    @Override
-    public Vec2 getCentroid()
-    {
-        return centroid.clone();
     }
 
     @Override
@@ -88,6 +78,12 @@ public class PolygonCollider implements IComponent, IShape
     public Vec2 getCentroidWorld()
     {
         return centroidWorld.clone();
+    }
+
+    @Override
+    public double getMomentOfInertia()
+    {
+        return polygon.getMomentOfInertia();
     }
 
     public Polygon getPolygon()

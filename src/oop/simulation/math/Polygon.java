@@ -11,7 +11,6 @@ import java.util.Collections;
 public class Polygon
 {
     private ArrayList<Vec2> vertices = new ArrayList<>();
-    private Vec2 centroid;
 
     /**
      * Constructor for polygon.
@@ -42,20 +41,46 @@ public class Polygon
         return vertices;
     }
 
-    /**
-     * Obtains the precomputed centroid of polygon.
-     * @return Centroid
-     */
-    public Vec2 getCentroid()
+    public double getSignedArea()
     {
-        return centroid.clone();
+        double area = 0;
+        for(int i = 0; i < vertices.size(); i++)
+        {
+            Vec2 a = vertices.get(i % vertices.size());
+            Vec2 b = vertices.get((i+1) % vertices.size());
+            area += a.cross(b);
+        }
+        return area / 2d;
+    }
+
+    public double getMomentOfInertia()
+    {
+        double p = 0, d = 0;
+        for(int i = 0; i < vertices.size(); i++)
+        {
+            Vec2 a = vertices.get(i % vertices.size());
+            Vec2 b = vertices.get((i+1) % vertices.size());
+            p += Math.abs(a.cross(b)) * (a.dot(a) + a.dot(b) + b.dot(b));
+            d += Math.abs(a.cross(b));
+        }
+        return p / (6*d);
     }
 
     private void calculateCentroid()
     {
-        centroid = new Vec2(0, 0);
+        double cx = 0, cy = 0;
+        for(int i = 0; i < vertices.size(); i++)
+        {
+            Vec2 a = vertices.get(i % vertices.size());
+            Vec2 b = vertices.get((i+1) % vertices.size());
+            cx += (a.x.get() + b.x.get()) * a.cross(b);
+            cy += (a.y.get() + b.y.get()) * a.cross(b);
+        }
+        cx /= 6d * getSignedArea();
+        cy /= 6d * getSignedArea();
+
+        Vec2 centroid = new Vec2(cx, cy);
         for(Vec2 v : vertices)
-            centroid.add(v);
-        centroid.scalarMultiply(1.0 / vertices.size());
+            v.subtract(centroid);
     }
 }

@@ -1,7 +1,10 @@
 package oop.simulation;
 
 import greenfoot.*;
+import oop.simulation.beans.Property;
+import oop.simulation.beans.Readonly;
 import oop.simulation.components.BehaviourComponent;
+import oop.simulation.ui.PicoUI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,12 +26,13 @@ public class Scene extends World
     private Camera activeCamera;
     private HashMap<String, GameObject> gameObjectHashMap;
     private GreenfootImage renderBuffer;
+    protected double deltaTime;
 
     /**
      * Time passed between this frame and the last one
      * in nanoseconds.
      */
-    protected double deltaTime;
+    public final Readonly<Double> DeltaT = Property.get(() -> deltaTime).readonly();
 
     // Why not?
     private static final Font errFont = new Font("Sans Serif", 20);
@@ -97,7 +101,8 @@ public class Scene extends World
     @Override
     public void addObject(Actor object, int x, int y)
     {
-        throw new UnsupportedOperationException("You cannot addObject() with Scenes!");
+        super.addObject(object, x, y);
+        //throw new UnsupportedOperationException("You cannot addObject() with Scenes!");
     }
 
     /**

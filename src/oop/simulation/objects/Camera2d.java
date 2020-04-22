@@ -71,8 +71,9 @@ public class Camera2d extends Camera
             g.setColor(Color.GREEN);
             g.drawPolygon(xs, ys, vec2s.size());
 
+            // Display centroid for now...
             var c = obj.getComponent(PolygonCollider.class).getCentroidWorld();
-            g.drawOval((int) Math.round(c.x.get()), (int) Math.round(c.y.get()), 3, 3);
+            g.drawOval((int) Math.round(c.x.get()+2), (int) Math.round(c.y.get()+2), 4, 4);
         }
 
         for(var ui : this.getComponents(UiOverlayComponent.class))

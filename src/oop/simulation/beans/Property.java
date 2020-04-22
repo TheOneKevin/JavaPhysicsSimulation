@@ -162,4 +162,16 @@ public class Property<T>
         this.getter = p.getter;
         this.setter = p.setter;
     }
+
+    /**
+     * Overrides current property with getter and setter.
+     *
+     * @param getter New getter
+     * @param setter New setter
+     */
+    public void rebind(Supplier<T> getter, Function<T, T> setter)
+    {
+        this.getter = getter;
+        this.setter = setter;
+    }
 }
