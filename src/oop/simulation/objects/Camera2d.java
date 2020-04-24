@@ -36,7 +36,6 @@ public class Camera2d extends Camera
     public void renderToBuffer(GreenfootImage g)
     {
         // Clear buffer
-        g.clear();
         g.setColor(Color.BLACK);
         g.fill();
 
@@ -65,7 +64,7 @@ public class Camera2d extends Camera
             for(int i = 0; i < vec2s.size(); i++)
             {
                 xs[i] = (int) Math.round(vec2s.get(i).x.get());
-                ys[i] = (int) Math.round(vec2s.get(i).y.get());
+                ys[i] = getScene().getHeight() - (int) Math.round(vec2s.get(i).y.get());
             }
 
             g.setColor(Color.GREEN);
@@ -73,7 +72,7 @@ public class Camera2d extends Camera
 
             // Display centroid for now...
             var c = obj.getComponent(PolygonCollider.class).getCentroidWorld();
-            g.drawOval((int) Math.round(c.x.get()+2), (int) Math.round(c.y.get()+2), 4, 4);
+            // g.drawOval((int) Math.round(c.x.get()+2), getScene().getHeight() - (int) Math.round(c.y.get()+8), 4, 4);
         }
 
         for(var ui : this.getComponents(UiOverlayComponent.class))

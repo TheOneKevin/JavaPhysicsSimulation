@@ -1,6 +1,8 @@
 package oop.simulation;
 
+import greenfoot.Actor;
 import oop.simulation.beans.*;
+import oop.simulation.components.Transform;
 
 import java.util.ArrayList;
 
@@ -12,12 +14,12 @@ import java.util.ArrayList;
  *
  * @author Kevin Dai
  */
-public class GameObject
+public class GameObject extends Actor
 {
     private String internalName;
+    private Transform internalTransform;
     private Scene scene;
 
-    // TODO: Should we expose as a property?
     private ArrayList<IComponent> components;
 
     // ======================= Properties ======================= //
@@ -26,6 +28,13 @@ public class GameObject
      * The name of this GameObject
      */
     public final Readonly<String> Name = Property.get(() -> internalName).readonly();
+
+    /**
+     * Transform component
+     */
+    public final Readonly<Transform> TransformComponent = Property.get(() -> internalTransform).readonly();
+
+    // ======================= Behaviours ======================= //
 
     /**
      * Default constructor of GameObject
@@ -50,6 +59,10 @@ public class GameObject
         return res;
     }
 
+    /**
+     * Gets an array of all components
+     * @return Array of components
+     */
     public IComponent[] getComponents()
     {
         IComponent[] arr = new IComponent[this.components.size()];
@@ -77,7 +90,23 @@ public class GameObject
     {
         if(getComponent(c.getClass()) != null && c.isUnique())
             return; // TODO: Failure
+        if(c instanceof Transform)
+            internalTransform = (Transform) c;
+        if(c.getOwner() != null)
+            throw new IllegalArgumentException("Component already has an owner!");
+        c.setOwner(this);
         this.components.add(c);
+    }
+
+    /**
+     * Removes a component from the GameObject
+     * @param c Component to remove
+     */
+    public void removeComponent(IComponent c)
+    {
+        if(c.getOwner() == this)
+            c.setOwner(null);
+        this.components.remove(c);
     }
 
     /**
@@ -93,4 +122,6 @@ public class GameObject
     {
         this.scene = s;
     }
+
+    // ======================= Actor Overrides ======================= //
 }

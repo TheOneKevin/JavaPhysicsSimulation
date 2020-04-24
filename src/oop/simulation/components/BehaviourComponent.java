@@ -1,8 +1,6 @@
 package oop.simulation.components;
 
-import oop.simulation.GameObject;
 import oop.simulation.IBehaviour;
-import oop.simulation.IComponent;
 import oop.simulation.beans.Property;
 
 /**
@@ -10,7 +8,7 @@ import oop.simulation.beans.Property;
  *
  * @author Kevin Dai
  */
-public class BehaviourComponent implements IComponent
+public class BehaviourComponent extends BasicComponent
 {
     private IBehaviour privateScript;
 
@@ -27,19 +25,8 @@ public class BehaviourComponent implements IComponent
     }
 
     @Override
-    public boolean isUnique()
+    public void update()
     {
-        return false;
-    }
-
-    /**
-     * Execute the attached script.
-     *
-     * @param g GameObject currently being executed.
-     */
-    @Override
-    public void update(GameObject g)
-    {
-        privateScript.act(g);
+        privateScript.act(owner);
     }
 }

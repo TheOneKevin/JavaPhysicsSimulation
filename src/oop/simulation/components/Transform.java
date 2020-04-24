@@ -1,7 +1,6 @@
 package oop.simulation.components;
 
 import oop.simulation.GameObject;
-import oop.simulation.IComponent;
 import oop.simulation.beans.Property;
 import oop.simulation.math.MatN;
 import oop.simulation.math.Vec2;
@@ -11,7 +10,7 @@ import oop.simulation.math.Vec2;
  *
  * @author Kevin Dai
  */
-public class Transform implements IComponent
+public class Transform extends BasicComponent
 {
     private Vec2 translation;
     private double rotation = 0;
@@ -63,17 +62,5 @@ public class Transform implements IComponent
         for(var t : g.getComponents(Transform.class))
             r.matrixMultiply(MatN.matrixMultiply(t.getTranslationMatrix(), MatN.matrixMultiply(t.getRotationMatrix(), t.getScaleMatrix())));
         return r;
-    }
-
-    @Override
-    public boolean isUnique()
-    {
-        return false;
-    }
-
-    @Override
-    public void update(GameObject g)
-    {
-
     }
 }

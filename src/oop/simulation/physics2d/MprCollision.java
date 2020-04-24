@@ -1,4 +1,4 @@
-package oop.simulation.physics2d.collision;
+package oop.simulation.physics2d;
 
 import oop.simulation.math.Geometry;
 import oop.simulation.math.Vec2;
@@ -100,9 +100,11 @@ public class MprCollision
                 Vec2 v21 = A.getSupportWorld(Vec2.negate(v2n));
                 Vec2 v22 = B.getSupportWorld(v2n);
 
-                m.Point1 = Vec2.scalarMultiply(v11, 1 - t).add(Vec2.scalarMultiply(v21, t));
-                m.Point2 = Vec2.scalarMultiply(v12, 1 - t).add(Vec2.scalarMultiply(v22, t));
-                m.Penetration = p;
+                m.contacts[0] = Vec2.scalarMultiply(v11, 1 - t).add(Vec2.scalarMultiply(v21, t));
+                m.contacts[1] = Vec2.scalarMultiply(v12, 1 - t).add(Vec2.scalarMultiply(v22, t));
+                m.penetration = Math.sqrt(p.lengthSq());
+                p.normalize();
+                m.normal = p;
 
                 return true;
             }

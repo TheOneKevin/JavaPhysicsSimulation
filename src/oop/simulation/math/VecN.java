@@ -196,10 +196,10 @@ public class VecN {
         return (T) u;
     }
 
-    public static VecN normalize(VecN n) {
+    public static <T extends VecN> T normalize(T n) {
         VecN v = n.clone();
         v.normalize();
-        return v;
+        return (T) v;
     }
 
     /**
@@ -342,6 +342,11 @@ public class VecN {
             }
         }
     }
+
+    /**
+     * @return the dot product of this vector with itself
+     */
+    public double lengthSq() { return getEuclideanInnerProduct(this, this); }
 
     /**
      * Returns whether a n-tuple is orthogonal to another n-tuple.

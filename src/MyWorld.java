@@ -6,19 +6,19 @@ import oop.simulation.components.*;
 import oop.simulation.math.Polygon;
 import oop.simulation.math.Vec2;
 import oop.simulation.objects.Camera2d;
-import oop.simulation.physics2d.collision.Manifold;
-import oop.simulation.physics2d.collision.MprCollision;
-import oop.simulation.ui.PicoStyleCyber;
-import oop.simulation.ui.PicoUI;
+import oop.simulation.physics2d.Rigidbody2d;
 
 /**
  * Example main world
  */
 public class MyWorld extends Scene
 {
+    private UiOverlayComponent ui;
+
     public MyWorld()
     {
         super(600, 400);
+        Greenfoot.setSpeed(50);
 
         // Create a camera now
         Camera2d cam = new Camera2d("camera1");
@@ -27,7 +27,7 @@ public class MyWorld extends Scene
         this.setActiveCamera("camera1");
 
         // Do the UI magic
-        UiOverlayComponent ui = new UiOverlayComponent(this.getWidth(), this.getHeight());
+        ui = new UiOverlayComponent(this.getWidth(), this.getHeight());
         cam.addComponent(ui);
 
         // Create the polygons
@@ -40,6 +40,9 @@ public class MyWorld extends Scene
         Polygon t2 = new Polygon(
             new Vec2(10, 30), new Vec2(125,140), new Vec2(0,140)
         );
+        Polygon t3 = new Polygon(
+            new Vec2(0, 0), new Vec2(600,0), new Vec2(600,10), new Vec2(0, 10)
+        );
 
         // Create gameobject 1
         GameObject g1 = new GameObject("g1");
@@ -51,13 +54,18 @@ public class MyWorld extends Scene
         GameObject g2 = new GameObject("g2");
         g2.addComponent(new PolygonRenderer(t2));
         g2.addComponent(new Rigidbody2d(g2, new PolygonCollider(t2), 1));
-        g2.addComponent(new Transform(100, 200, 1, 1));
+        g2.addComponent(new Transform(100, 300, 1, 1));
+
+        // Create gameobject 3
+        GameObject g3 = new GameObject("g3");
+        g3.addComponent(new PolygonRenderer(t3));
+        g3.addComponent(new Rigidbody2d(g3, new PolygonCollider(t3), Double.POSITIVE_INFINITY));
+        g3.addComponent(new Transform(300, 5, 1, 1));
 
         // Make gameobject 1 moveable
         g1.addComponent(new BehaviourComponent(g -> {
             // Get rigidbody
             var rb = g.getComponent(Rigidbody2d.class);
-            rb.clearForces();
 
             // Just testing, apply forces of 3N (1px = 1cm, 1s = 1s)
             if(Greenfoot.isKeyDown("w")) rb.applyForce(new Vec2(0,  300));
@@ -74,5 +82,16 @@ public class MyWorld extends Scene
         // Add them to the world!
         this.addGameObject(g1);
         this.addGameObject(g2);
+        this.addGameObject(g3);
+    }
+
+    @Override
+    public void act()
+    {
+        // Draw FPS
+        ui.getTexture().setColor(Color.GREEN);
+        ui.getTexture().drawString("FPS: " + 1/(DeltaT.get()), 10, 30);
+
+        super.act();
     }
 }

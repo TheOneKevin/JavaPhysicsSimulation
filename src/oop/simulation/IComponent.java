@@ -19,7 +19,16 @@ public interface IComponent
 
     /**
      * Contains very very simple logic run once per act()
-     * @param g GameObject currently being run
      */
-    void update(GameObject g);
+    void update();
+
+    /**
+     * @param g GameObject that is parent
+     */
+    void setOwner(GameObject g);
+
+    /**
+     * @return The owner
+     */
+    GameObject getOwner();
 }

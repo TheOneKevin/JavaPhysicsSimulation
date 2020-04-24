@@ -1,6 +1,6 @@
 package oop.simulation.math;
 
-import oop.simulation.physics2d.collision.IShape;
+import oop.simulation.physics2d.IShape;
 
 /**
  * Various geometry-related static functions. Feel free to add more stuff here.

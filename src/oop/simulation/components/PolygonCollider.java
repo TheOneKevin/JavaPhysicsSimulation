@@ -4,14 +4,14 @@ import oop.simulation.GameObject;
 import oop.simulation.math.MatN;
 import oop.simulation.math.Vec2;
 import oop.simulation.math.Polygon;
-import oop.simulation.physics2d.collision.IShape;
+import oop.simulation.physics2d.IShape;
 
 /**
  * Enables collisions between colliders
  *
  * @author Kevin Dai
  */
-public class PolygonCollider implements IShape
+public class PolygonCollider extends BasicComponent implements IShape
 {
     private Polygon polygon;
 
@@ -31,9 +31,9 @@ public class PolygonCollider implements IShape
     }
 
     @Override
-    public void update(GameObject g)
+    public void update()
     {
-        T = Transform.computeModelWorldMatrix(g);
+        T = Transform.computeModelWorldMatrix(owner);
         centroidWorld = Vec2.wTransform(T, new Vec2(0, 0));
     }
 

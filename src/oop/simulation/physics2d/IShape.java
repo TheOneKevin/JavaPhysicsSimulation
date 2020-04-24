@@ -1,4 +1,4 @@
-package oop.simulation.physics2d.collision;
+package oop.simulation.physics2d;
 
 import oop.simulation.IComponent;
 import oop.simulation.math.Vec2;

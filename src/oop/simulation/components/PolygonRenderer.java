@@ -1,7 +1,5 @@
 package oop.simulation.components;
 
-import oop.simulation.GameObject;
-import oop.simulation.IComponent;
 import oop.simulation.math.Polygon;
 
 /**
@@ -10,7 +8,7 @@ import oop.simulation.math.Polygon;
  * @author Kevin Dai
  * @author Mustafa M.
  */
-public class PolygonRenderer implements IComponent
+public class PolygonRenderer extends BasicComponent
 {
     private Polygon polygon;
 
@@ -23,12 +21,6 @@ public class PolygonRenderer implements IComponent
     public boolean isUnique()
     {
         return true;
-    }
-
-    @Override
-    public void update(GameObject g)
-    {
-
     }
 
     public Polygon getPolygon()

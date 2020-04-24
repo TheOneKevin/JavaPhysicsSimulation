@@ -4,7 +4,8 @@ import greenfoot.*;
 import oop.simulation.beans.Property;
 import oop.simulation.beans.Readonly;
 import oop.simulation.components.BehaviourComponent;
-import oop.simulation.ui.PicoUI;
+import oop.simulation.physics2d.CollisionSystem;
+import oop.simulation.physics2d.Rigidbody2d;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ public class Scene extends World
     private Camera activeCamera;
     private HashMap<String, GameObject> gameObjectHashMap;
     private GreenfootImage renderBuffer;
+    private CollisionSystem collisionSystem;
     protected double deltaTime;
 
     /**
@@ -58,20 +60,32 @@ public class Scene extends World
         super(width, height, 1);
         this.gameObjectHashMap = new HashMap<>();
         this.renderBuffer = new GreenfootImage(width, height);
+        this.collisionSystem = new CollisionSystem();
 
-        // Init dt counter
-        this.prevTime = System.nanoTime();
+        // Render
         this.render();
+
         // Then add camera
         this.activeCamera = camera;
     }
 
     @Override
+    public void started()
+    {
+        // Init dt counter
+        this.prevTime = System.nanoTime();
+    }
+
+    @Override
     public void act()
     {
-        // Compute dt
+        // Compute dt in ms
         deltaTime = (System.nanoTime() - prevTime) / 1000000000.0;
         prevTime = System.nanoTime();
+
+        // Cache on the go!
+        var bodies = new ArrayList<Rigidbody2d>();
+        var scripts = new ArrayList<BehaviourComponent>();
 
         // Component updates first
         for(var g : gameObjectHashMap.values())
@@ -79,17 +93,39 @@ public class Scene extends World
             for (var c : g.getComponents())
             {
                 if (c instanceof BehaviourComponent)
+                {
+                    scripts.add((BehaviourComponent) c);
                     continue;
-                c.update(g);
+                }
+
+                if(c instanceof Rigidbody2d)
+                {
+                    bodies.add((Rigidbody2d) c);
+                    continue;
+                }
+
+                c.update();
             }
         }
-        this.render();
-        // Apply behaviour updates last
-        for(var g : gameObjectHashMap.values())
-            for (var c : g.getComponents(BehaviourComponent.class))
-                c.update(g);
 
-        // this.render();
+        // Do collisions
+        collisionSystem.collide(bodies);
+        for(var b : bodies) b.integrate();
+        for(int i = 0; i < 20; i++)
+            collisionSystem.solve();
+        collisionSystem.correctPositions();
+        for(var b : bodies)
+        {
+            b.update();
+            b.clearForces();
+        }
+
+        // Render!
+        this.render();
+
+        // Apply behaviour updates last
+        for (var c : scripts)
+            c.update();
     }
 
     @Override
