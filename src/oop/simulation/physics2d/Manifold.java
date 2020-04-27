@@ -38,7 +38,7 @@ public class Manifold
             Vec2 rb = Vec2.subtract(contact, B.getOwner().TransformComponent.get().Position.get());
             // Why?! This is so ugly I'm going to cry
             Vec2 rv = Vec2.add(B.linearVelocity, Vec2.cross(B.angularVelocity, rb).subtract(A.linearVelocity).subtract(Vec2.cross(A.angularVelocity, ra)));
-            if (rv.lengthSq() < Vec2.scalarMultiply(PhysicsWorld.GRAVITY, dt).lengthSq() + PhysicsWorld.EPSILON)
+            if (PhysicsWorld.equal(rv.lengthSq(), Vec2.scalarMultiply(PhysicsWorld.GRAVITY, dt).lengthSq()))
                 e = 0;
         }
     }
@@ -74,8 +74,7 @@ public class Manifold
             B.applyImpulse(impulse.clone(), rb.clone());
 
             // Calculate tangent impulse
-            Vec2 t = Vec2.normalize(rv);
-            t.subtract(Vec2.scalarMultiply(normal, rv.dot(normal)));
+            Vec2 t = Vec2.subtract(rv, Vec2.scalarMultiply(normal, rv.dot(normal)));
             t.normalize();
 
             double jt = -rv.dot(t);

@@ -22,15 +22,18 @@ public class Rigidbody2d implements IComponent
     protected IShape collider;
 
     // TODO: Move into another class called "Material"
-    protected double restitution = 0.1;
-    protected double staticFriction = 0.2;
-    protected double dynamicFriction = 0.4;
+    protected double restitution;
+    protected double staticFriction;
+    protected double dynamicFriction;
 
     public final Property<Double> AngularVelocity = Property.get(() -> angularVelocity).set(v -> angularVelocity = v);
-    public final Readonly<IShape> Collider = Property.get(() -> collider).readonly();
 
     public Rigidbody2d(IShape collider, double mass)
     {
+        this.restitution = 0.2;
+        this.staticFriction = 0.4;
+        this.dynamicFriction = 0.3;
+
         this.force = new Vec2(0, 0);
         this.arm = new Vec2(0, 0);
         this.linearVelocity = new Vec2(0, 0);
@@ -39,7 +42,8 @@ public class Rigidbody2d implements IComponent
         // this.mass = mass;
         if(Double.isInfinite(mass))
             this.invMass = 0;
-        this.invMass = 1.0 / mass;
+        else
+            this.invMass = 1.0 / mass;
         this.invInertia = 1.0 / collider.getMomentOfInertia();
     }
 

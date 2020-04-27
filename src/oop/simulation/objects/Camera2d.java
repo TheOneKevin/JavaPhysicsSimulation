@@ -72,7 +72,7 @@ public class Camera2d extends Camera
 
             // Display centroid for now...
             var c = obj.getComponent(PolygonCollider.class).getCentroidWorld();
-            // g.drawOval((int) Math.round(c.x.get()+2), getScene().getHeight() - (int) Math.round(c.y.get()+8), 4, 4);
+            g.drawOval((int) Math.round(c.x.get()+2), getScene().getHeight() - (int) Math.round(c.y.get()+8), 4, 4);
         }
 
         for(var ui : this.getComponents(UiOverlayComponent.class))

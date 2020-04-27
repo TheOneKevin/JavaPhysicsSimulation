@@ -6,6 +6,7 @@ import oop.simulation.components.*;
 import oop.simulation.math.Polygon;
 import oop.simulation.math.Vec2;
 import oop.simulation.objects.Camera2d;
+import oop.simulation.physics2d.MprCollision;
 import oop.simulation.physics2d.Rigidbody2d;
 
 /**
@@ -41,7 +42,7 @@ public class MyWorld extends Scene
             new Vec2(10, 30), new Vec2(125,140), new Vec2(0,140)
         );
         Polygon t3 = new Polygon(
-            new Vec2(0, 0), new Vec2(600,0), new Vec2(600,10), new Vec2(0, 10)
+            new Vec2(0, 0), new Vec2(600,0), new Vec2(600,100), new Vec2(0, 100)
         );
 
         // Create gameobject 1
@@ -60,23 +61,26 @@ public class MyWorld extends Scene
         GameObject g3 = new GameObject("g3");
         g3.addComponent(new PolygonRenderer(t3));
         g3.addComponent(new Rigidbody2d(g3, new PolygonCollider(t3), Double.POSITIVE_INFINITY));
-        g3.addComponent(new Transform(300, 5, 1, 1));
+        g3.addComponent(new Transform(290, 5, 1, 1));
 
         // Make gameobject 1 moveable
         g1.addComponent(new BehaviourComponent(g -> {
             // Get rigidbody
             var rb = g.getComponent(Rigidbody2d.class);
 
+            // Strength
+            double k = 300;
+
             // Just testing, apply forces of 3N (1px = 1cm, 1s = 1s)
-            if(Greenfoot.isKeyDown("w")) rb.applyForce(new Vec2(0,  300));
-            if(Greenfoot.isKeyDown("s")) rb.applyForce(new Vec2(0, -300));
-            if(Greenfoot.isKeyDown("a")) rb.applyForce(new Vec2(-300, 0));
-            if(Greenfoot.isKeyDown("d")) rb.applyForce(new Vec2( 300, 0));
+            if(Greenfoot.isKeyDown("w")) rb.applyForce(new Vec2(0,  k));
+            if(Greenfoot.isKeyDown("s")) rb.applyForce(new Vec2(0, -k));
+            if(Greenfoot.isKeyDown("a")) rb.applyForce(new Vec2(-k, 0));
+            if(Greenfoot.isKeyDown("d")) rb.applyForce(new Vec2( k, 0));
 
             // Rotate the damn thing
             rb.AngularVelocity.set(0d);
-            if(Greenfoot.isKeyDown("left"))  rb.AngularVelocity.set( 1d);
-            if(Greenfoot.isKeyDown("right")) rb.AngularVelocity.set(-1d);
+            if(Greenfoot.isKeyDown("left"))  rb.applyForce(new Vec2(-k, 0), new Vec2(0, 100));
+            if(Greenfoot.isKeyDown("right")) rb.applyForce(new Vec2( k, 0), new Vec2(0, 100));
         }));
 
         // Add them to the world!

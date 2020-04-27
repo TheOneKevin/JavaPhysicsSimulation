@@ -9,7 +9,7 @@ public class CollisionSystem
 {
     ArrayList<Manifold> contacts = new ArrayList<>();
 
-    public void collide(ArrayList<Rigidbody2d> bodies)
+    public void collide(ArrayList<Rigidbody2d> bodies, double dt)
     {
         contacts.clear();
         // Get every pair of bodies in the scene
@@ -22,7 +22,10 @@ public class CollisionSystem
                 if(A.invMass == 0 && B.invMass == 0) continue;
                 Manifold m = new Manifold(A, B);
                 if(m.solve())
+                {
                     contacts.add(m);
+                    m.initialize(dt);
+                }
             }
         }
     }

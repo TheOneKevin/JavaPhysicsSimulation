@@ -108,4 +108,8 @@ public class Vec2 extends VecN {
         return new Vec2(this.data[0], this.data[1]);
     }
 
+    public boolean equals(Vec2 b)
+    {
+        return this.x.get().equals(b.x.get()) && this.y.get().equals(b.y.get());
+    }
 }
