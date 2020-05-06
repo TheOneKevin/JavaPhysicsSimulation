@@ -1,6 +1,7 @@
 package oop.simulation.components;
 
 import greenfoot.Color;
+import greenfoot.Font;
 import greenfoot.GreenfootImage;
 
 public class UiOverlayComponent extends BasicComponent
@@ -19,5 +20,19 @@ public class UiOverlayComponent extends BasicComponent
     {
         texture.setColor(TRANSPARENT);
         texture.clear();
+    }
+
+    public void clearPartially(int xStart, int yStart, int width, int height)
+    {
+        texture.setColor(TRANSPARENT);
+        texture.fillRect(xStart, yStart, width, height);
+    }
+
+    public void writeString(String str, int x, int y, Color color, int size, boolean bold, boolean italic)
+    {
+        Font f = new Font(bold, italic, size);
+        texture.setFont(f);
+        texture.setColor(color);
+        texture.drawString(str, x, y);
     }
 }
