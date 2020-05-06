@@ -93,8 +93,13 @@ public class MyWorld extends Scene
     public void act()
     {
         // Draw FPS
-        ui.getTexture().setColor(Color.GREEN);
-        ui.getTexture().drawString("FPS: " + 1/(DeltaT.get()), 10, 30);
+        ui.writeString("FPS: " + Math.round(1/(DeltaT.get())), 10, 30, Color.RED, 15, false, false);
+        //creates button
+        ui.createButton("globglogabgalab", 450,20, 120, 40, Color.MAGENTA, false,
+                Color.BLUE,14, false, false);
+
+        //cuts of part of fps counter, but also deletes other things. Test it out if you'd like.
+        //ui.clearPartially(0,0, 1000, 25);
 
         super.act();
     }
