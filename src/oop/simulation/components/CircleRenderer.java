@@ -2,7 +2,9 @@ package oop.simulation.components;
 
 import oop.simulation.math.Circle;
 import oop.simulation.math.Polygon;
-
+/*
+    @author Nathan Ngo
+ */
 public class CircleRenderer extends BasicComponent
 {
     private Circle circle;

@@ -3,6 +3,7 @@ import greenfoot.Greenfoot;
 import oop.simulation.GameObject;
 import oop.simulation.Scene;
 import oop.simulation.components.*;
+import oop.simulation.math.Circle;
 import oop.simulation.math.Polygon;
 import oop.simulation.math.Vec2;
 import oop.simulation.objects.Camera2d;
@@ -44,6 +45,7 @@ public class MyWorld extends Scene
         Polygon t3 = new Polygon(
             new Vec2(0, 0), new Vec2(600,0), new Vec2(600,100), new Vec2(0, 100)
         );
+        Circle c1 = new Circle(10, 5);
 
         // Create gameobject 1
         GameObject g1 = new GameObject("g1");
@@ -62,6 +64,13 @@ public class MyWorld extends Scene
         g3.addComponent(new PolygonRenderer(t3));
         g3.addComponent(new Rigidbody2d(g3, new PolygonCollider(t3), Double.POSITIVE_INFINITY));
         g3.addComponent(new Transform(290, 5, 1, 1));
+
+        GameObject k1 = new GameObject("k1");
+        k1.addComponent(new CircleRenderer(c1));
+        k1.addComponent(new Rigidbody2d(k1, new CircleCollider(c1), 5));
+        k1.addComponent(new Transform (200, 300, 1, 1));
+
+
 
         // Make gameobject 1 moveable
         g1.addComponent(new BehaviourComponent(g -> {
@@ -87,6 +96,7 @@ public class MyWorld extends Scene
         this.addGameObject(g1);
         this.addGameObject(g2);
         this.addGameObject(g3);
+
     }
 
     @Override
