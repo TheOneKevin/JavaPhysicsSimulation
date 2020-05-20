@@ -26,7 +26,7 @@ public class CircleCollider extends BasicComponent implements IShape
 
     @Override
     public Vec2 getCentroidWorld() {
-        return null;
+        return Circle.getCentroidWorld();
     }
     
     @Override
