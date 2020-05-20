@@ -5,6 +5,10 @@ import oop.simulation.math.Polygon;
 import oop.simulation.math.Vec2;
 import oop.simulation.physics2d.IShape;
 
+/*
+    @author Nathan Ngo
+ */
+
 public class CircleCollider extends BasicComponent implements IShape
 {
     private oop.simulation.math.Circle Circle;

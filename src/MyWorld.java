@@ -45,7 +45,7 @@ public class MyWorld extends Scene
         Polygon t3 = new Polygon(
             new Vec2(0, 0), new Vec2(600,0), new Vec2(600,100), new Vec2(0, 100)
         );
-        Circle c1 = new Circle(10, 5);
+
 
         // Create gameobject 1
         GameObject g1 = new GameObject("g1");
@@ -65,10 +65,6 @@ public class MyWorld extends Scene
         g3.addComponent(new Rigidbody2d(g3, new PolygonCollider(t3), Double.POSITIVE_INFINITY));
         g3.addComponent(new Transform(290, 5, 1, 1));
 
-        GameObject k1 = new GameObject("k1");
-        k1.addComponent(new CircleRenderer(c1));
-        k1.addComponent(new Rigidbody2d(k1, new CircleCollider(c1), 5));
-        k1.addComponent(new Transform (200, 300, 1, 1));
 
 
 
