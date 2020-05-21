@@ -19,7 +19,7 @@ public class Circle
     }
 
     /*
-        This is used to fin the moment of inertia in a circle. It is finding the torque needed for
+        This is used to find the moment of inertia in a circle. It is finding the torque needed for
         angular acceleration that is desired by the user based on the circle's mass and radius.
      */
 

@@ -55,18 +55,11 @@ public class MyWorld extends Scene
                 new Vec2(600,200), new Vec2(600,900), new Vec2(599, 900), new Vec2(599,200)
         );
 
+        Polygon t7 = new Polygon(
+                new Vec2(-40, 900), new Vec2(-40, 850), new Vec2(600, 850), new Vec2(600, 900)
+        );
 
-        // Create gameobject 1
-        GameObject g1 = new GameObject("g1");
-        g1.addComponent(new PolygonRenderer(t1));
-        g1.addComponent(new Rigidbody2d(g1, new PolygonCollider(t1), 1));
-        g1.addComponent(new Transform(100, 100, 1, 1));
 
-        // Create gameobject 2
-        GameObject g2 = new GameObject("g2");
-        g2.addComponent(new PolygonRenderer(t2));
-        g2.addComponent(new Rigidbody2d(g2, new PolygonCollider(t2), 1));
-        g2.addComponent(new Transform(100, 300, 1, 1));
 
         // Create gameobject 3
         GameObject g3 = new GameObject("g3");
@@ -86,26 +79,88 @@ public class MyWorld extends Scene
         g5.addComponent(new Rigidbody2d(g5, new PolygonCollider(t5), Double.POSITIVE_INFINITY));
         g5.addComponent(new Transform(588, 50, 1, 1));
 
+        GameObject g7 = new GameObject("g7");
+        g7.addComponent(new PolygonRenderer(t7));
+        g7.addComponent(new Rigidbody2d(g7, new PolygonCollider(t7), Double.POSITIVE_INFINITY));
+        g7.addComponent(new Transform(290, 415, 1, 1));
+
         // Create gameobject 2
         Circle c1 = new Circle(20);
-        GameObject g6 = new GameObject("g6");
-        g6.addComponent(new CircleRenderer(c1));
-        g6.addComponent(new Rigidbody2d(g6, new CircleCollider(c1), 1));
-        g6.addComponent(new Transform(100, 300, 1, 1));
+        Circle c2 = new Circle(20);
+        Circle c3 = new Circle(20);
+        Circle c4 = new Circle(20);
+        Circle c5 = new Circle(20);
+        Circle c6 = new Circle(20);
+        Circle c7 = new Circle(20);
+        Circle c8 = new Circle(20);
+        Circle c9 = new Circle(20);
+        Circle c10 = new Circle(20);
 
-        // Make gameobject 1 moveable
-        g1.addComponent(new BehaviourComponent(g -> {
+        GameObject k1 = new GameObject("k1");
+        k1.addComponent(new CircleRenderer(c1));
+        k1.addComponent(new Rigidbody2d(k1, new CircleCollider(c1), 1));
+        k1.addComponent(new Transform(100, 300, 1, 1));
+
+        GameObject k2 = new GameObject("k2");
+        k2.addComponent(new CircleRenderer(c2));
+        k2.addComponent(new Rigidbody2d(k2, new CircleCollider(c2), 1));
+        k2.addComponent(new Transform(400, 100,1,1));
+
+        GameObject k3 = new GameObject("k3");
+        k3.addComponent(new CircleRenderer(c3));
+        k3.addComponent(new Rigidbody2d(k3, new CircleCollider(c3), 1));
+        k3.addComponent(new Transform(405, 100,1,1));
+
+        GameObject k4 = new GameObject("k4");
+        k4.addComponent(new CircleRenderer(c4));
+        k4.addComponent(new Rigidbody2d(k4, new CircleCollider(c4), 1));
+        k4.addComponent(new Transform(4010, 100,1,1));
+
+        GameObject k5 = new GameObject("k5");
+        k5.addComponent(new CircleRenderer(c5));
+        k5.addComponent(new Rigidbody2d(k5, new CircleCollider(c5), 1));
+        k5.addComponent(new Transform(400, 105,1,1));
+
+        GameObject k6 = new GameObject("k6");
+        k6.addComponent(new CircleRenderer(c6));
+        k6.addComponent(new Rigidbody2d(k6, new CircleCollider(c6), 1));
+        k6.addComponent(new Transform(405, 105,1,1));
+
+        GameObject k7 = new GameObject("k7");
+        k7.addComponent(new CircleRenderer(c7));
+        k7.addComponent(new Rigidbody2d(k7, new CircleCollider(c7), 1));
+        k7.addComponent(new Transform(410, 105,1,1));
+
+        GameObject k8 = new GameObject("k8");
+        k8.addComponent(new CircleRenderer(c8));
+        k8.addComponent(new Rigidbody2d(k8, new CircleCollider(c8), 1));
+        k8.addComponent(new Transform(415, 110,1,1));
+
+        GameObject k9 = new GameObject("k9");
+        k9.addComponent(new CircleRenderer(c9));
+        k9.addComponent(new Rigidbody2d(k9, new CircleCollider(c9), 1));
+        k9.addComponent(new Transform(415, 105,1,1));
+
+        GameObject k10 = new GameObject("k10");
+        k10.addComponent(new CircleRenderer(c10));
+        k10.addComponent(new Rigidbody2d(k10, new CircleCollider(c10), 1));
+        k10.addComponent(new Transform(420, 100,1,1));
+
+        // Make gameobject 2 moveable
+        k1.addComponent(new BehaviourComponent(g -> {
             // Get rigidbody
             var rb = g.getComponent(Rigidbody2d.class);
 
             // Strength
             double k = 300;
+            double l = 1000;
 
             // Just testing, apply forces of 3N (1px = 1cm, 1s = 1s)
             if(Greenfoot.isKeyDown("w")) rb.applyForce(new Vec2(0,  k));
             if(Greenfoot.isKeyDown("s")) rb.applyForce(new Vec2(0, -k));
             if(Greenfoot.isKeyDown("a")) rb.applyForce(new Vec2(-k, 0));
             if(Greenfoot.isKeyDown("d")) rb.applyForce(new Vec2( k, 0));
+            if(Greenfoot.isKeyDown("space")) rb.applyForce(new Vec2(l, 0));
 
             // Rotate the damn thing
             // rb.AngularVelocity.set(0d); // Biggest facepalm ever
@@ -114,12 +169,20 @@ public class MyWorld extends Scene
         }));
 
         // Add them to the world!
-        this.addGameObject(g1);
-        this.addGameObject(g2);
         this.addGameObject(g3);
         this.addGameObject(g4);
         this.addGameObject(g5);
-        this.addGameObject(g6);
+        this.addGameObject(k1);
+        this.addGameObject(g7);
+        this.addGameObject(k2);
+        this.addGameObject(k3);
+        this.addGameObject(k4);
+        this.addGameObject(k5);
+        this.addGameObject(k6);
+        this.addGameObject(k7);
+        this.addGameObject(k8);
+        this.addGameObject(k9);
+        this.addGameObject(k10);
     }
 
     @Override
