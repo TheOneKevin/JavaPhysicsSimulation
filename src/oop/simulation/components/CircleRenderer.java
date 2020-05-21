@@ -1,7 +1,6 @@
 package oop.simulation.components;
 
 import oop.simulation.math.Circle;
-import oop.simulation.math.Polygon;
 /*
     @author Nathan Ngo
  */
@@ -25,7 +24,7 @@ public class CircleRenderer extends BasicComponent
         return circle;
     }
 
-    public void setPolygon(Circle c)
+    public void setCircle(Circle c)
     {
         circle = c;
     }

@@ -73,15 +73,19 @@ public class MyWorld extends Scene
         g3.addComponent(new Rigidbody2d(g3, new PolygonCollider(t3), Double.POSITIVE_INFINITY));
         g3.addComponent(new Transform(290, 5, 1, 1));
 
+        //Creates the left boarder
         GameObject g4 = new GameObject("g4");
         g4.addComponent(new PolygonRenderer(t4));
         g4.addComponent(new Rigidbody2d(g4, new PolygonCollider(t4), Double.POSITIVE_INFINITY));
         g4.addComponent(new Transform(-10, 50, 1, 1));
 
+        //Creates the right boarder
         GameObject g5 = new GameObject("g5");
         g5.addComponent(new PolygonRenderer(t5));
         g5.addComponent(new Rigidbody2d(g5, new PolygonCollider(t5), Double.POSITIVE_INFINITY));
         g5.addComponent(new Transform(588, 50, 1, 1));
+
+
 
 
 

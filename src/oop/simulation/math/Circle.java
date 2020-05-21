@@ -14,6 +14,7 @@ public class Circle
     private double radius;
     private double mass = density  * PI * radius;
     private Vec2 centroidWorld;
+    private ArrayList<Vec2> Circumference = new ArrayList<>();
 
     public Circle(double theDensity, double theRadius, Vec2 theCentroidWorld)
     {
