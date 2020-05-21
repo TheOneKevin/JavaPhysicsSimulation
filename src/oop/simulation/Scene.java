@@ -111,7 +111,7 @@ public class Scene extends World
         // Do collisions
         collisionSystem.collide(bodies, deltaTime);
         for(var b : bodies) b.integrate();
-        for(int i = 0; i < 20; i++)
+        for(int i = 0; i < bodies.size(); i++)
             collisionSystem.solve();
         collisionSystem.correctPositions();
         for(var b : bodies)

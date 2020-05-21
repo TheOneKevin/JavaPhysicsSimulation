@@ -10,48 +10,36 @@ import java.util.ArrayList;
 public class Circle
 {
     private double density;
-    private final double PI = 3.14;
     private double radius;
-    private double mass = density  * PI * radius;
-    private Vec2 centroidWorld;
     private ArrayList<Vec2> Circumference = new ArrayList<>();
 
-    public Circle(double theDensity, double theRadius, Vec2 theCentroidWorld)
+    public Circle(double theRadius)
     {
-        density = theDensity;
         radius = theRadius;
-        centroidWorld = theCentroidWorld;
     }
+
     /*
         This is used to fin the moment of inertia in a circle. It is finding the torque needed for
         angular acceleration that is desired by the user based on the circle's mass and radius.
      */
 
-    public Vec2 getCentroidWorld()
-    {
-        return centroidWorld;
-    }
     public double getMomentOfInertia()
     {
-        double value = 0.25 * mass * radius * radius;
-        return value;
+        return 0.25 * radius * radius;
     }
 
     public double getArea()
     {
-        double area = PI * radius * radius;
-        return area;
+        return Math.PI * radius * radius;
     }
 
-    public double getDiameter()
+    public double getRadius()
     {
-        double diameter = radius * 2;
-        return diameter;
+        return radius;
     }
 
     public double getCircumference()
     {
-        double circumference = 2 * PI * radius;
-        return circumference;
+        return 2 * Math.PI * radius;
     }
 }

@@ -20,7 +20,7 @@ public class MyWorld extends Scene
     public MyWorld()
     {
         super(600, 400);
-        Greenfoot.setSpeed(50);
+        Greenfoot.setSpeed(100); // Yeah baby!!
 
         // Create a camera now
         Camera2d cam = new Camera2d("camera1");
@@ -39,6 +39,7 @@ public class MyWorld extends Scene
             new Vec2(100, 100),
             new Vec2(0, 100)
         );
+
         Polygon t2 = new Polygon(
             new Vec2(10, 30), new Vec2(125,140), new Vec2(0,140)
         );
@@ -85,9 +86,12 @@ public class MyWorld extends Scene
         g5.addComponent(new Rigidbody2d(g5, new PolygonCollider(t5), Double.POSITIVE_INFINITY));
         g5.addComponent(new Transform(588, 50, 1, 1));
 
-
-
-
+        // Create gameobject 2
+        Circle c1 = new Circle(20);
+        GameObject g6 = new GameObject("g6");
+        g6.addComponent(new CircleRenderer(c1));
+        g6.addComponent(new Rigidbody2d(g6, new CircleCollider(c1), 1));
+        g6.addComponent(new Transform(100, 300, 1, 1));
 
         // Make gameobject 1 moveable
         g1.addComponent(new BehaviourComponent(g -> {
@@ -104,7 +108,7 @@ public class MyWorld extends Scene
             if(Greenfoot.isKeyDown("d")) rb.applyForce(new Vec2( k, 0));
 
             // Rotate the damn thing
-            rb.AngularVelocity.set(0d);
+            // rb.AngularVelocity.set(0d); // Biggest facepalm ever
             if(Greenfoot.isKeyDown("left"))  rb.applyForce(new Vec2(-k, 0), new Vec2(0, 100));
             if(Greenfoot.isKeyDown("right")) rb.applyForce(new Vec2( k, 0), new Vec2(0, 100));
         }));
@@ -115,7 +119,7 @@ public class MyWorld extends Scene
         this.addGameObject(g3);
         this.addGameObject(g4);
         this.addGameObject(g5);
-
+        this.addGameObject(g6);
     }
 
     @Override
@@ -123,9 +127,6 @@ public class MyWorld extends Scene
     {
         // Draw FPS
         ui.writeString("FPS: " + Math.round(1/(DeltaT.get())), 10, 30, Color.RED, 15, false, false);
-        //creates button
-        ui.createButton("globglogabgalab", 450,20, 120, 40, Color.MAGENTA, false,
-                Color.BLUE,14, false, false);
 
         //cuts of part of fps counter, but also deletes other things. Test it out if you'd like.
         //ui.clearPartially(0,0, 1000, 25);
