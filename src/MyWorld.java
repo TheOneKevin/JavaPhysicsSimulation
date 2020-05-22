@@ -31,6 +31,8 @@ public class MyWorld extends Scene
         txt1.Margins.set(new PicoUI.Margins(5, 3, 5, 3));
         txt1.Metadata.set(0);
         txt1.Text.set("0");
+        String forceText = txt1.Text.get();
+        double force = Double.parseDouble(forceText);
         // Update layout
         ctx.update();
 
@@ -165,15 +167,14 @@ public class MyWorld extends Scene
 
             // Strength
             double k = 300;
-            double l = 3000;
-
+            double l = force * 1000;
 
             // Just testing, apply forces of 3N (1px = 1cm, 1s = 1s)
             if (Greenfoot.isKeyDown("w")) rb.applyForce(new Vec2(0, k));
             if (Greenfoot.isKeyDown("s")) rb.applyForce(new Vec2(0, -k));
             if (Greenfoot.isKeyDown("a")) rb.applyForce(new Vec2(-k, 0));
             if (Greenfoot.isKeyDown("d")) rb.applyForce(new Vec2(k, 0));
-            if (Greenfoot.isKeyDown("space")) rb.applyForce(new Vec2(0, -l));
+            if (Greenfoot.isKeyDown("f")) rb.applyForce(new Vec2(0, -l));
 
             // Rotate the damn thing
             // rb.AngularVelocity.set(0d); // Biggest facepalm ever
@@ -214,4 +215,5 @@ public class MyWorld extends Scene
         //ui.clearPartially(0,0, 1000, 25);
         super.act();
     }
+
 }

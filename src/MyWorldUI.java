@@ -9,14 +9,15 @@ import oop.simulation.ui.RIconsUI;
  */
 public class MyWorldUI extends World
 {
+    private double force;
     /**
      * Constructor for objects of class MyWorld.
      */
     public MyWorldUI()
     {
+
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1);
-
         // Create new UI context
         PicoUI ctx = new PicoUI(400, 200);
         this.addObject(ctx, 300, 200);
@@ -41,17 +42,11 @@ public class MyWorldUI extends World
             t.Metadata.set((Integer) t.Metadata.get() - 1);
             t.Text.set(t.Metadata.get().toString());
         });
-
         // Text box
         var txt1 = ctx.new TextField("textbox1", 50, lbt.Height.get());
         txt1.Margins.set(new PicoUI.Margins(5, 3, 5, 3));
         txt1.Metadata.set(0);
         txt1.Text.set("0");
-
-        var txt2 = ctx.new TextField("textbox2", 100, lbt.Height.get());
-        txt2.Margins.set(new PicoUI.Margins(10, 6, 10, 6));
-        txt2.Metadata.set(0);
-        txt2.Text.set("Type a number from 1-5 to determine the force");
 
         // Right button
         var rbt = ctx.new Button("button5", "", RIconsUI.getIcon(RIconsUI.RIcons.RICON_ARROW_RIGHT_FILL));
@@ -147,4 +142,5 @@ public class MyWorldUI extends World
             }
         },200, 100);*/
     }
+
 }
