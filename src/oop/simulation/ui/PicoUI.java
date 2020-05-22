@@ -32,6 +32,7 @@
 package oop.simulation.ui;
 
 import greenfoot.*;
+import greenfoot.core.Simulation;
 import oop.simulation.ui.fonts.BakedFontInfo;
 import oop.simulation.ui.fonts.baked.CourierNew;
 import oop.simulation.beans.Property;
@@ -639,7 +640,7 @@ public class PicoUI extends Actor
             Margins.set(new Margins(5, 5, 5, 5));
             PromptText.set("");
 
-            timer = new Timer(25, () -> showCursor = !showCursor, true);
+            timer = new Timer(350, () -> showCursor = !showCursor, true);
             timer.start();
 
             updateDimensions();
@@ -1412,23 +1413,25 @@ public class PicoUI extends Actor
      */
     private static class Timer
     {
-        private int tick = 0;
-        private int timeout;
+        private double tick = 0;
+        private double timeout;
+        private double deltaTime = 0, prevTime = 0;
         private Runnable onTimeout;
         private boolean doRepeat;
         private boolean active = false;
 
         /**
          * Initializes the timer.
-         * @param timeout  Number of ticks() before timeout is triggered
+         * @param timeout  Time in ms before timeout is triggered
          * @param trip     Method to call when timeout is triggered
          * @param doRepeat Whether the timer should reset itself or stop
          */
-        public Timer(int timeout, Runnable trip, boolean doRepeat)
+        public Timer(double timeout, Runnable trip, boolean doRepeat)
         {
             this.timeout = timeout;
             this.onTimeout = trip;
             this.doRepeat = doRepeat;
+            this.prevTime = System.nanoTime();
         }
 
         /**
@@ -1453,8 +1456,10 @@ public class PicoUI extends Actor
         public void tick()
         {
             if(!active) return;
-            tick++;
-            if(tick == timeout)
+            deltaTime = (System.nanoTime() - prevTime) / 1000000.0;
+            prevTime = System.nanoTime();
+            tick += deltaTime;
+            if(tick >= timeout)
             {
                 tick = 0;
                 if(!doRepeat) active = false;
