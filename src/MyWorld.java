@@ -95,6 +95,7 @@ public class MyWorld extends Scene
         g7.addComponent(new Rigidbody2d(g7, new PolygonCollider(t7), Double.POSITIVE_INFINITY));
         g7.addComponent(new Transform(290, 415, 1, 1));
 
+
         // Create gameobject 2
         Circle c1 = new Circle(20);
         Circle c2 = new Circle(20);
@@ -164,7 +165,7 @@ public class MyWorld extends Scene
 
             // Strength
             double k = 300;
-            double l = 40000;
+            double l = 3000;
 
 
             // Just testing, apply forces of 3N (1px = 1cm, 1s = 1s)
@@ -195,6 +196,7 @@ public class MyWorld extends Scene
         this.addGameObject(k8);
         this.addGameObject(k9);
         this.addGameObject(k10);
+
     }
 
     private void setBackground(PicoUI.PicoStyle style)

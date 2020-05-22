@@ -48,6 +48,11 @@ public class MyWorldUI extends World
         txt1.Metadata.set(0);
         txt1.Text.set("0");
 
+        var txt2 = ctx.new TextField("textbox2", 100, lbt.Height.get());
+        txt2.Margins.set(new PicoUI.Margins(10, 6, 10, 6));
+        txt2.Metadata.set(0);
+        txt2.Text.set("Type a number from 1-5 to determine the force");
+
         // Right button
         var rbt = ctx.new Button("button5", "", RIconsUI.getIcon(RIconsUI.RIcons.RICON_ARROW_RIGHT_FILL));
         rbt.Margins.set(new PicoUI.Margins(5, 0, 5, -2));
