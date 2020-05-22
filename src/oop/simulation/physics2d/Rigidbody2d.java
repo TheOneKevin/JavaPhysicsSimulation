@@ -30,7 +30,7 @@ public class Rigidbody2d implements IComponent
 
     public Rigidbody2d(IShape collider, double mass)
     {
-        this.restitution = 4;
+        this.restitution = 3.5;
         this.staticFriction = 0.4;
         this.dynamicFriction = 0.3;
 
