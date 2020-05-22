@@ -10,6 +10,7 @@ import oop.simulation.objects.Camera2d;
 import oop.simulation.physics2d.MprCollision;
 import oop.simulation.physics2d.Rigidbody2d;
 
+
 /**
  * Example main world
  */
@@ -99,7 +100,7 @@ public class MyWorld extends Scene
         GameObject k1 = new GameObject("k1");
         k1.addComponent(new CircleRenderer(c1));
         k1.addComponent(new Rigidbody2d(k1, new CircleCollider(c1), 1));
-        k1.addComponent(new Transform(100, 300, 1, 1));
+        k1.addComponent(new Transform(405, 300, 1, 1));
 
         GameObject k2 = new GameObject("k2");
         k2.addComponent(new CircleRenderer(c2));
@@ -148,52 +149,51 @@ public class MyWorld extends Scene
 
         // Make gameobject 2 moveable
         k1.addComponent(new BehaviourComponent(g -> {
-            // Get rigidbody
-            var rb = g.getComponent(Rigidbody2d.class);
+                // Get rigidbody
+                var rb = g.getComponent(Rigidbody2d.class);
 
-            // Strength
-            double k = 300;
-            double l = 1000;
+                // Strength
+                double k = 300;
+                double l = 40000;
 
-            // Just testing, apply forces of 3N (1px = 1cm, 1s = 1s)
-            if(Greenfoot.isKeyDown("w")) rb.applyForce(new Vec2(0,  k));
-            if(Greenfoot.isKeyDown("s")) rb.applyForce(new Vec2(0, -k));
-            if(Greenfoot.isKeyDown("a")) rb.applyForce(new Vec2(-k, 0));
-            if(Greenfoot.isKeyDown("d")) rb.applyForce(new Vec2( k, 0));
-            if(Greenfoot.isKeyDown("space")) rb.applyForce(new Vec2(l, 0));
 
-            // Rotate the damn thing
-            // rb.AngularVelocity.set(0d); // Biggest facepalm ever
-            if(Greenfoot.isKeyDown("left"))  rb.applyForce(new Vec2(-k, 0), new Vec2(0, 100));
-            if(Greenfoot.isKeyDown("right")) rb.applyForce(new Vec2( k, 0), new Vec2(0, 100));
-        }));
+                // Just testing, apply forces of 3N (1px = 1cm, 1s = 1s)
+                if (Greenfoot.isKeyDown("w")) rb.applyForce(new Vec2(0, k));
+                if (Greenfoot.isKeyDown("s")) rb.applyForce(new Vec2(0, -k));
+                if (Greenfoot.isKeyDown("a")) rb.applyForce(new Vec2(-k, 0));
+                if (Greenfoot.isKeyDown("d")) rb.applyForce(new Vec2(k, 0));
+                if (Greenfoot.isKeyDown("space")) rb.applyForce(new Vec2(0, -l));
 
-        // Add them to the world!
-        this.addGameObject(g3);
-        this.addGameObject(g4);
-        this.addGameObject(g5);
-        this.addGameObject(k1);
-        this.addGameObject(g7);
-        this.addGameObject(k2);
-        this.addGameObject(k3);
-        this.addGameObject(k4);
-        this.addGameObject(k5);
-        this.addGameObject(k6);
-        this.addGameObject(k7);
-        this.addGameObject(k8);
-        this.addGameObject(k9);
-        this.addGameObject(k10);
+                // Rotate the damn thing
+                // rb.AngularVelocity.set(0d); // Biggest facepalm ever
+                if (Greenfoot.isKeyDown("left")) rb.applyForce(new Vec2(-k, 0), new Vec2(0, 100));
+                if (Greenfoot.isKeyDown("right")) rb.applyForce(new Vec2(k, 0), new Vec2(0, 100));
+            }));
+
+            // Add them to the world
+            this.addGameObject(g3);
+            this.addGameObject(g4);
+            this.addGameObject(g5);
+            this.addGameObject(k1);
+            this.addGameObject(g7);
+            this.addGameObject(k2);
+            this.addGameObject(k3);
+            this.addGameObject(k4);
+            this.addGameObject(k5);
+            this.addGameObject(k6);
+            this.addGameObject(k7);
+            this.addGameObject(k8);
+            this.addGameObject(k9);
+            this.addGameObject(k10);
+        }
+
+        @Override
+        public void act()
+        {
+            // Draw FPS
+            ui.writeString("FPS: " + Math.round(1/(DeltaT.get())), 10, 30, Color.RED, 15, false, false);
+            //cuts of part of fps counter, but also deletes other things. Test it out if you'd like.
+            //ui.clearPartially(0,0, 1000, 25);
+            super.act();
+        }
     }
-
-    @Override
-    public void act()
-    {
-        // Draw FPS
-        ui.writeString("FPS: " + Math.round(1/(DeltaT.get())), 10, 30, Color.RED, 15, false, false);
-
-        //cuts of part of fps counter, but also deletes other things. Test it out if you'd like.
-        //ui.clearPartially(0,0, 1000, 25);
-
-        super.act();
-    }
-}
