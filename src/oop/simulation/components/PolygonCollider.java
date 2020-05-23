@@ -8,6 +8,8 @@ import oop.simulation.physics2d.IShape;
 
 /**
  * Enables collisions between colliders
+ * It takes in the geometric data of the circles and determines how it will respond based
+ * on the physics of the world.
  *
  * @author Kevin Dai
  */

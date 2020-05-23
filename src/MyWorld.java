@@ -31,7 +31,7 @@ public class MyWorld extends Scene
         txt1.Metadata.set(0);
         txt1.Text.set("4");
         String forceText = txt1.Text.get();
-        double force = Double.parseDouble(forceText);
+        double force = Double.parseDouble(txt1.Text.get());
         // Update layout
         ctx.update();
 

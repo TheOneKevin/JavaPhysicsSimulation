@@ -1,8 +1,11 @@
 package oop.simulation.components;
 
 import oop.simulation.math.Circle;
-/*
-    @author Nathan Ngo
+/**
+ * This class generates the image of the circle on to the screen
+ *
+ * @author Nathan Ngo
+ * @version April 2020
  */
 public class CircleRenderer extends BasicComponent
 {
