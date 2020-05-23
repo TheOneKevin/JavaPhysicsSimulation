@@ -1,7 +1,10 @@
 package oop.simulation.physics2d;
 
+import greenfoot.Greenfoot;
+import greenfoot.GreenfootSound;
 import oop.simulation.GameObject;
 import oop.simulation.Scene;
+import oop.simulation.math.Vec2;
 
 import java.util.ArrayList;
 
@@ -40,5 +43,10 @@ public class CollisionSystem
     {
         for(var c : contacts)
             c.correctPositions();
+    }
+
+    public int numberContacts()
+    {
+        return contacts.size();
     }
 }

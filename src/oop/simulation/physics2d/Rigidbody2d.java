@@ -137,6 +137,11 @@ public class Rigidbody2d implements IComponent
         this.dynamicFriction = mk;
     }
 
+    public double getMass()
+    {
+        return 1.0/invMass;
+    }
+
     @Override
     public GameObject getOwner()
     {

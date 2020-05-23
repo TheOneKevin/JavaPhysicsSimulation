@@ -4,6 +4,7 @@ import greenfoot.Color;
 import greenfoot.GreenfootImage;
 import oop.simulation.Camera;
 import oop.simulation.GameObject;
+import oop.simulation.beans.Property;
 import oop.simulation.components.*;
 import oop.simulation.math.*;
 
@@ -16,6 +17,9 @@ import java.util.ArrayList;
  */
 public class Camera2d extends Camera
 {
+    private boolean toggleEffects = true;
+    public final Property<Boolean> ShowEffects = Property.get(() -> toggleEffects).set(v -> toggleEffects = v);
+
     /**
      * Default constructor of GameObject
      *
@@ -34,7 +38,7 @@ public class Camera2d extends Camera
         g.fill();
 
         // Render only if GameObject has IRenderer (is render-able)
-        ArrayList<GameObject> gameObjects = getScene().getGameObjects((v) ->
+        ArrayList<GameObject> gameObjects = getScene().getGameObject((v) ->
             (v.getComponent(PolygonRenderer.class) != null || v.getComponent(CircleRenderer.class) != null)
                 && v.getComponent(Transform.class) != null
         );
@@ -68,14 +72,17 @@ public class Camera2d extends Camera
                 }
 
                 if(obj.isSelected())
-                    g.setColor(Color.RED);
+                    g.setColor(Color.MAGENTA);
                 else
                     g.setColor(Color.GREEN);
                 g.drawPolygon(xs, ys, vec2s.size());
 
-                // Display centroid for now...
-                var c = obj.getComponent(PolygonCollider.class).getCentroidWorld();
-                g.drawOval((int) Math.round(c.x.get()) - 2, getScene().getHeight() - (int) Math.round(c.y.get()) - 2, 4, 4);
+                if(toggleEffects)
+                {
+                    // Display centroid for now...
+                    var c = obj.getComponent(PolygonCollider.class).getCentroidWorld();
+                    g.drawOval((int) Math.round(c.x.get()) - 2, getScene().getHeight() - (int) Math.round(c.y.get()) - 2, 4, 4);
+                }
             }
 
             // Circle renderer
@@ -86,7 +93,7 @@ public class Camera2d extends Camera
                 Vec2 pos = Vec2.wTransform(modelWorldViewMatrix, new Vec2(0, 0));
                 int r = (int) Math.round(cl.getRadius());
                 if(obj.isSelected())
-                    g.setColor(Color.RED);
+                    g.setColor(Color.MAGENTA);
                 else
                     g.setColor(Color.GREEN);
                 g.drawOval(
@@ -96,9 +103,12 @@ public class Camera2d extends Camera
                     2 * r
                 );
 
-                // Display centroid for now...
-                var c = obj.getComponent(CircleCollider.class).getCentroidWorld();
-                g.drawOval((int) Math.round(c.x.get()) - 2, getScene().getHeight() - (int) Math.round(c.y.get()) - 2, 4, 4);
+                if(toggleEffects)
+                {
+                    // Display centroid for now...
+                    var c = obj.getComponent(CircleCollider.class).getCentroidWorld();
+                    g.drawOval((int) Math.round(c.x.get()) - 2, getScene().getHeight() - (int) Math.round(c.y.get()) - 2, 4, 4);
+                }
             }
 
             // End scope

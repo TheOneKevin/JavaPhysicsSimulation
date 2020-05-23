@@ -94,7 +94,7 @@ public class GameObject extends Actor
         if(c instanceof Transform)
             internalTransform = (Transform) c;
         if(c.getOwner() != null)
-            throw new IllegalArgumentException("Component already has an owner!");
+            c.getOwner().removeComponent(c);
         c.setOwner(this);
         this.components.add(c);
     }

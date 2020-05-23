@@ -115,7 +115,7 @@ public class Scene extends World
         // Do collisions
         collisionSystem.collide(bodies, deltaTime);
         for(var b : bodies) b.integrate();
-        for(int i = 0; i < bodies.size(); i++)
+        for(int i = 0; i < collisionSystem.numberContacts(); i++)
             collisionSystem.solve();
         collisionSystem.correctPositions();
         for(var b : bodies)
@@ -162,7 +162,7 @@ public class Scene extends World
      * @param name Name of GameObject
      * @return GameObject if found, null otherwise.
      */
-    public GameObject getGameObjects(String name)
+    public GameObject getGameObject(String name)
     {
         return this.gameObjectHashMap.getOrDefault(name, null);
     }
@@ -172,13 +172,22 @@ public class Scene extends World
      * @param filter Takes in a GameObject and returns a Boolean to decide whether to include or exclude object.
      * @return ArrayList of GameObjects which satisfies the given filter
      */
-    public ArrayList<GameObject> getGameObjects(Function<GameObject, Boolean> filter)
+    public ArrayList<GameObject> getGameObject(Function<GameObject, Boolean> filter)
     {
         ArrayList<GameObject> obj = new ArrayList<>();
         this.gameObjectHashMap.forEach((k, v) -> {
             if(filter.apply(v)) obj.add(v);
         });
         return obj;
+    }
+
+    /**
+     * Remove GameObject based on name
+     * @param name Name of GameObject
+     */
+    public void removeGameObject(String name)
+    {
+        this.gameObjectHashMap.remove(name);
     }
 
     /**

@@ -4,7 +4,7 @@ import oop.simulation.math.Vec2;
 
 public class PhysicsWorld
 {
-    public static final Vec2 GRAVITY = new Vec2(0.0, -98.1);
+    public static Vec2 GRAVITY = new Vec2(0.0, -98.1);
     public static final double EPSILON = 0.0001d;
     public static final double PENETRATION_ALLOWANCE = 0.05d;
     public static final double PENETRATION_CORRECTION = 0.4d;

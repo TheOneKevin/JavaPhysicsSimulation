@@ -1,5 +1,6 @@
 package oop.simulation.physics2d;
 
+import greenfoot.GreenfootSound;
 import oop.simulation.math.Vec2;
 import oop.simulation.math.VecN;
 

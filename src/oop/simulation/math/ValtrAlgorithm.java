@@ -106,7 +106,7 @@ public class ValtrAlgorithm {
         }
 
         // Sort the vectors by angle
-        Collections.sort(vec, Comparator.comparingDouble(v -> Math.atan2(v.y.get(), v.x.get())));
+        vec.sort(Comparator.comparingDouble(v -> Math.atan2(v.y.get(), v.x.get())));
 
         // Lay them end-to-end
         double x = 0, y = 0;
