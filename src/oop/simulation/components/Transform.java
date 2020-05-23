@@ -9,6 +9,7 @@ import oop.simulation.math.Vec2;
  * Transform component describes object space to world space transformations.
  *
  * @author Kevin Dai
+ * @version April 2020
  */
 public class Transform extends BasicComponent
 {
@@ -20,6 +21,13 @@ public class Transform extends BasicComponent
     public final Property<Double> Rotation = Property.get(() -> rotation).set((r) -> rotation = r);
     public final Property<Vec2> Scale = Property.get(() -> scaling).set((s) -> scaling = new Vec2(s));
 
+    /**
+     * This is the transform constructor
+     * @param x         Determines where the shape will be on the x coordinate
+     * @param y         Determines where the shape will be on the y coordinate
+     * @param sx        Determines the scale of the shape horizontally
+     * @param sy        Determines the scale of the shape vertically
+     */
     public Transform(double x, double y, double sx, double sy)
     {
         this.translation = new Vec2(x, y);
@@ -56,6 +64,10 @@ public class Transform extends BasicComponent
         return new MatN(T);
     }
 
+    /**
+     * Calculates the math required for the physics of each game object
+     * @param g         This is the game object, like the circle or polygon that is used
+     */
     public static MatN computeModelWorldMatrix(GameObject g)
     {
         MatN r = MatN.identityN(3);

@@ -3,6 +3,11 @@ package oop.simulation.components;
 import oop.simulation.GameObject;
 import oop.simulation.IComponent;
 
+/**
+ * This is the super class that all the other classes in the components inherit from
+ * @author Kevin Dai
+ * @version April 2020
+ */
 public class BasicComponent implements IComponent
 {
     protected GameObject owner;
@@ -19,6 +24,10 @@ public class BasicComponent implements IComponent
 
     }
 
+    /**
+     * Determines the set owner of a game object
+     * @param g             GameObject that is parent
+     */
     @Override
     public void setOwner(GameObject g)
     {

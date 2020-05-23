@@ -7,6 +7,7 @@ import oop.simulation.beans.Property;
  * Allows attaching behaviours to GameObjects
  *
  * @author Kevin Dai
+ * @version April 2020
  */
 public class BehaviourComponent extends BasicComponent
 {
