@@ -318,6 +318,7 @@ public class MyWorld extends Scene
                 c.Checked.set(!c.Checked.get());
                 cam.ShowEffects.set(c.Checked.get());
         });
+        ctx.getControl("btnFx").Checked.set(true);
     }
 
     private void addRandomCircle(boolean random, double d, double e, double ms, double mk)
