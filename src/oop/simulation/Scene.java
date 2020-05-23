@@ -175,9 +175,11 @@ public class Scene extends World
     public ArrayList<GameObject> getGameObject(Function<GameObject, Boolean> filter)
     {
         ArrayList<GameObject> obj = new ArrayList<>();
-        this.gameObjectHashMap.forEach((k, v) -> {
-            if(filter.apply(v)) obj.add(v);
-        });
+        for(var v : this.gameObjectHashMap.values())
+        {
+            if(filter.apply(v))
+                obj.add(v);
+        }
         return obj;
     }
 

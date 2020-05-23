@@ -103,11 +103,19 @@ public class Camera2d extends Camera
                     2 * r
                 );
 
+                Vec2 tgt = Vec2.wTransform(modelWorldViewMatrix, new Vec2(0, r));
+
                 if(toggleEffects)
                 {
                     // Display centroid for now...
                     var c = obj.getComponent(CircleCollider.class).getCentroidWorld();
                     g.drawOval((int) Math.round(c.x.get()) - 2, getScene().getHeight() - (int) Math.round(c.y.get()) - 2, 4, 4);
+                    g.drawLine(
+                        (int) Math.round(pos.x.get()),
+                        getScene().getHeight() - (int) Math.round(pos.y.get()),
+                        (int) Math.round(tgt.x.get()),
+                        getScene().getHeight() - (int) Math.round(tgt.y.get())
+                    );
                 }
             }
 
