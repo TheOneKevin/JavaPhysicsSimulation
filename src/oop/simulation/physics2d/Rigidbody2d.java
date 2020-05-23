@@ -126,6 +126,17 @@ public class Rigidbody2d implements IComponent
             this.g = g;
     }
 
+    public void changeProperties(double m, double e, double ms, double mk)
+    {
+        if(Double.isInfinite(m))
+            this.invMass = 0;
+        else
+            this.invMass = 1.0 / m;
+        this.restitution = e;
+        this.staticFriction = ms;
+        this.dynamicFriction = mk;
+    }
+
     @Override
     public GameObject getOwner()
     {

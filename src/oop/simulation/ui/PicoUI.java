@@ -114,6 +114,9 @@ public class PicoUI extends Actor
         this.uiFont = new Font("Courier New", false, false, style.getTextSize());
 
         setImage(new GreenfootImage(contextWidth, contextHeight));
+        var c = style.getBackgroundDefault();
+        getImage().setColor(new Color(c.getRed(), c.getGreen(), c.getBlue(), 200));
+        getImage().fill();
         getImage().setColor(style.getBorderColorNormal());
         getImage().drawRect(0, 0, contextWidth-1, contextHeight-1);
     }
@@ -180,6 +183,12 @@ public class PicoUI extends Actor
             getWorld().addObject(v, x + v.Width.get()/2, y);
             x += v.Width.get() + margin;
         }
+    }
+
+    public void remove()
+    {
+        getWorld().removeObjects(getWorld().getObjects(PicoComponent.class));
+        getWorld().removeObject(this);
     }
 
     public void setTheme(PicoStyle st)
