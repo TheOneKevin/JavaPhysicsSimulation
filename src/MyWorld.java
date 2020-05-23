@@ -21,7 +21,6 @@ public class MyWorld extends Scene
     {
         super(600, 400);
         Greenfoot.setSpeed(100); // Yeah baby!!
-
         // New UI
         PicoUI ctx = new PicoUI(400, 200, PicoStyleCyber.getInstance());
         this.addObject(ctx, 300, 200);
@@ -30,7 +29,7 @@ public class MyWorld extends Scene
         var txt1 = ctx.new TextField("textbox1", 50);
         txt1.Margins.set(new PicoUI.Margins(5, 3, 5, 3));
         txt1.Metadata.set(0);
-        txt1.Text.set("0");
+        txt1.Text.set("4");
         String forceText = txt1.Text.get();
         double force = Double.parseDouble(forceText);
         // Update layout
