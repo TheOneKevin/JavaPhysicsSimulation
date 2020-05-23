@@ -6,11 +6,22 @@ import greenfoot.GreenfootImage;
 import java.awt.*;
 import java.awt.image.*;
 
+/**
+ * This is what gives the game user interaction to the simulation
+ * @author Kevin Dai
+ * @author Mustafa M.
+ * @version May 2020
+ */
 public class UiOverlayComponent extends BasicComponent
 {
     private static final Color TRANSPARENT = new Color(0, 0, 0, 0);
     private GreenfootImage texture;
 
+    /**
+     * This is the constructor for the user interface
+     * @param width         This is the width of the panel
+     * @param height        This is the height of the panel
+     */
     public UiOverlayComponent(int width, int height)
     {
         texture = new GreenfootImage(width, height);
@@ -24,8 +35,14 @@ public class UiOverlayComponent extends BasicComponent
         texture.clear();
     }
 
-    // Works, but also clears outside UI too, I don't know why. Kevin fix dis if u can.
-    // Not recommended for use as of now.
+
+    /**
+     * This clears the panel so that it can be re written
+     * @param xStart        Determines the x coordinate at the start
+     * @param yStart        Determines the x coordinate at the start
+     * @param width         Determines the width
+     * @param height        Determines the height
+     */
     public void clearPartially(int xStart, int yStart, int width, int height)
     {
         texture.setColor(TRANSPARENT);
@@ -39,6 +56,16 @@ public class UiOverlayComponent extends BasicComponent
         texture = newTexture;
     }
 
+    /**
+     * This is what writes the text onto the panel
+     * @param str           This is the text written
+     * @param x             The x coordinate
+     * @param y             The y coordinate
+     * @param color         The color of the panel
+     * @param size          The size of the panel
+     * @param bold          Whether the text is in bold or not
+     * @param italic        Whether the text is italicized or not
+     */
     public void writeString(String str, int x, int y, Color color, int size, boolean bold, boolean italic)
     {
         Font f = new Font(bold, italic, size);
@@ -47,7 +74,20 @@ public class UiOverlayComponent extends BasicComponent
         texture.drawString(str, x, y);
     }
 
-    //does not have a click function yet.
+    /**
+     * This creates the buttons for the user to interact with
+     * @param str           This is the text in the button
+     * @param x             The x coordinate
+     * @param y             The y coordinate
+     * @param width         The width of the panel
+     * @param height        The height of the panel
+     * @param buttonColor   The color of the button
+     * @param filled        Whether or not the panel is filled with color
+     * @param fontColor     The color of the font
+     * @param fontSize      The size of the font
+     * @param fontBold      Whether or not the text is bold
+     * @param fontItalic    Whether or not the text is italicized
+     */
     public void createButton(String str, int x, int y, int width, int height, Color buttonColor, boolean filled,
                              Color fontColor, int fontSize, boolean fontBold, boolean fontItalic)
     {

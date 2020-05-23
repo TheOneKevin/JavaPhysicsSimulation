@@ -32,6 +32,10 @@ public class PolygonCollider extends BasicComponent implements IShape
         return true;
     }
 
+    /**
+     * Updates the circle and interacts with the transform class so that the circle can be
+     * created.
+     */
     @Override
     public void update()
     {
@@ -39,6 +43,11 @@ public class PolygonCollider extends BasicComponent implements IShape
         centroidWorld = Vec2.wTransform(T, new Vec2(0, 0));
     }
 
+    /**
+     * This maps out the circle to describe it in a different way then storing the
+     * vertices.
+     * @param in      Determines the coordinates needed in the 2d plane
+     */
     @Override
     public Vec2 getSupport(Vec2 in)
     {
@@ -57,6 +66,11 @@ public class PolygonCollider extends BasicComponent implements IShape
         return out;
     }
 
+    /**
+     * This maps out the circle to describe it in a different way then storing the
+     * vertices.
+     * @param in      Determines the coordinates needed in the 2d plane
+     */
     @Override
     public Vec2 getSupportWorld(Vec2 in)
     {
@@ -75,13 +89,20 @@ public class PolygonCollider extends BasicComponent implements IShape
         }
         return out;
     }
-
+    /**
+     * Finds the centroid world of the circle. It can be located as the small circe
+     * that is found at the center of every polygon and circle.
+     */
     @Override
     public Vec2 getCentroidWorld()
     {
         return centroidWorld.clone();
     }
 
+    /**
+     * Finds the It is finding the torque needed for angular acceleration that is desired
+     * by the user based on the circle's mass and radius.
+     */
     @Override
     public double getMomentOfInertia()
     {

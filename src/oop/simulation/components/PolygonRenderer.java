@@ -7,6 +7,7 @@ import oop.simulation.math.Polygon;
  *
  * @author Kevin Dai
  * @author Mustafa M.
+ * @version April 2020
  */
 public class PolygonRenderer extends BasicComponent
 {
