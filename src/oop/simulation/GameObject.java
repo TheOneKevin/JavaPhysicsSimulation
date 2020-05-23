@@ -19,6 +19,7 @@ public class GameObject extends Actor
     private String internalName;
     private Transform internalTransform;
     private Scene scene;
+    private boolean isSelected;
 
     private ArrayList<IComponent> components;
 
@@ -117,6 +118,12 @@ public class GameObject extends Actor
     {
         return this.scene;
     }
+
+    public void select() { this.isSelected = true; }
+
+    public void deselect() { this.isSelected = false; }
+
+    public boolean isSelected() { return this.isSelected; }
 
     protected void addToScene(Scene s)
     {

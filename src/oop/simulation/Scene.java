@@ -83,6 +83,10 @@ public class Scene extends World
         deltaTime = (System.nanoTime() - prevTime) / 1000000000.0;
         prevTime = System.nanoTime();
 
+        // Clamp to avoid issues
+        if(deltaTime > 0.1)
+            deltaTime = 0.1;
+
         // Cache on the go!
         var bodies = new ArrayList<Rigidbody2d>();
         var scripts = new ArrayList<BehaviourComponent>();

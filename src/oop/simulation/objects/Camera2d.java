@@ -67,12 +67,15 @@ public class Camera2d extends Camera
                     ys[i] = getScene().getHeight() - (int) Math.round(vec2s.get(i).y.get());
                 }
 
-                g.setColor(Color.GREEN);
+                if(obj.isSelected())
+                    g.setColor(Color.RED);
+                else
+                    g.setColor(Color.GREEN);
                 g.drawPolygon(xs, ys, vec2s.size());
 
                 // Display centroid for now...
                 var c = obj.getComponent(PolygonCollider.class).getCentroidWorld();
-                g.drawOval((int) Math.round(c.x.get()), getScene().getHeight() - (int) Math.round(c.y.get()), 4, 4);
+                g.drawOval((int) Math.round(c.x.get()) - 2, getScene().getHeight() - (int) Math.round(c.y.get()) - 2, 4, 4);
             }
 
             // Circle renderer
@@ -82,7 +85,10 @@ public class Camera2d extends Camera
                 Circle cl = cr.getCircle();
                 Vec2 pos = Vec2.wTransform(modelWorldViewMatrix, new Vec2(0, 0));
                 int r = (int) Math.round(cl.getRadius());
-                g.setColor(Color.GREEN);
+                if(obj.isSelected())
+                    g.setColor(Color.RED);
+                else
+                    g.setColor(Color.GREEN);
                 g.drawOval(
                     (int) Math.round(pos.x.get()) - r,
                     getScene().getHeight() - (int) Math.round(pos.y.get()) - r,
@@ -92,7 +98,7 @@ public class Camera2d extends Camera
 
                 // Display centroid for now...
                 var c = obj.getComponent(CircleCollider.class).getCentroidWorld();
-                g.drawOval((int) Math.round(c.x.get()+7), getScene().getHeight() - (int) Math.round(c.y.get()+9), 4, 4);
+                g.drawOval((int) Math.round(c.x.get()) - 2, getScene().getHeight() - (int) Math.round(c.y.get()) - 2, 4, 4);
             }
 
             // End scope

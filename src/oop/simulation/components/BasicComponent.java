@@ -25,7 +25,7 @@ public class BasicComponent implements IComponent
         if(g != this.owner && this.owner != null)
         {
             this.owner = g;
-            this.owner.removeComponent(this);
+            // this.owner.removeComponent(this);
         }
 
         if(this.owner == null)
