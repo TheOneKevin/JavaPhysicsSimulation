@@ -7,6 +7,13 @@ import oop.simulation.beans.Readonly;
 import oop.simulation.components.Transform;
 import oop.simulation.math.Vec2;
 
+/**
+ * This is the rigid body that we attach to the game object
+ * It provides the physics into the game objects
+ *
+ * @author Kai Qi
+ * @version April 2020
+ */
 public class Rigidbody2d implements IComponent
 {
     private GameObject g;
@@ -28,6 +35,11 @@ public class Rigidbody2d implements IComponent
 
     public final Property<Double> AngularVelocity = Property.get(() -> angularVelocity).set(v -> angularVelocity = v);
 
+    /**
+     * This is a constructor for the rigid body class
+     * @param collider          The collider
+     * @param mass
+     */
     public Rigidbody2d(IShape collider, double mass)
     {
         this.restitution = 3.5;
@@ -47,23 +59,43 @@ public class Rigidbody2d implements IComponent
         this.invInertia = 1.0 / collider.getMomentOfInertia();
     }
 
+    /**
+     * This is a constructor for the rigid body class
+     * @param g             This is the game object specified
+     * @param collider      This is the collider for the game object
+     * @param mass          This is the mass of the object
+     */
     public Rigidbody2d(GameObject g, IShape collider, double mass)
     {
         this(collider, mass);
         g.addComponent(collider);
     }
 
+    /**
+     * This applies force to the given game object
+     * @param f             The specified coordinates
+     */
     public void applyForce(Vec2 f)
     {
         force.add(f);
     }
 
+    /**
+     * This applies force to the given game object
+     * @param f             The specified coordinates
+     * @param r             The specified coordinates
+     */
     public void applyForce(Vec2 f, Vec2 r)
     {
         arm.add(r);
         force.add(f);
     }
 
+    /**
+     * This applies impulse to the game object
+     * @param j             The specified coordinates
+     * @param r             The specified coordinates
+     */
     public void applyImpulse(Vec2 j, Vec2 r)
     {
         linearVelocity.add(j.scalarMultiply(invMass));
@@ -113,6 +145,10 @@ public class Rigidbody2d implements IComponent
         t.Rotation.set(t.Rotation.get() + rb.angularVelocity * dt);
     }
 
+    /**
+     * Sets the owner of the game object
+     * @param g             GameObject that is parent
+     */
     @Override
     public void setOwner(GameObject g)
     {
@@ -126,6 +162,13 @@ public class Rigidbody2d implements IComponent
             this.g = g;
     }
 
+    /**
+     * Changes the properties of the game object
+     * @param m             The specified mass
+     * @param e             The specified restitution
+     * @param ms            The specified static friction
+     * @param mk            The specified dynamic friction
+     */
     public void changeProperties(double m, double e, double ms, double mk)
     {
         if(Double.isInfinite(m))

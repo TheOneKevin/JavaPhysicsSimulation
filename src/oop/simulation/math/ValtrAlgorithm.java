@@ -30,13 +30,19 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-/**
+/**This algorithm generates random convex polygons
+ *
  * @author Sander Verdonschot
+ * @version May 2020
  */
 public class ValtrAlgorithm {
 
     private static final Random RAND = new Random();
 
+    /**
+     * This is the List for the coordinates the convex polygons are generated
+     * @param n         This is the number in the arraylist
+     */
     public static List<Vec2> generateRandomConvexPolygon(int n) {
         // Generate two lists of random X and Y coordinates
         List<Double> xPool = new ArrayList<>(n);

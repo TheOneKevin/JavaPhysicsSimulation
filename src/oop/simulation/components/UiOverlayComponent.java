@@ -98,7 +98,11 @@ public class UiOverlayComponent extends BasicComponent
         else
             texture.drawRect(x,y,width,height);
 
-        //creates the font and writes on top of the button, aligns roughly at the center
+        /**
+         * creates the font and writes on top of the button, aligns roughly at the center
+         * @param fontBold          Determines whether the font is bold
+         * @param fontItalic        Determines whether the font is italicised
+         */
         Font f = new Font(fontBold, fontItalic, fontSize);
         texture.setFont(f);
         texture.setColor(fontColor);

@@ -3,8 +3,20 @@ package oop.simulation.physics2d;
 import oop.simulation.math.Geometry;
 import oop.simulation.math.Vec2;
 
+/**
+ * This is in charge of detecting where the game object will go after it's collision.
+ *
+ * @author Kevin Dai
+ */
+
 public class MprCollision
 {
+    /**
+     * This finds the way to the origin of the game object.
+     * @param a         This is the coordinate of a point on the outside of the game object
+     * @param b         this is the coordinate of a point on the outside of the game object
+     * @return
+     */
     private static Vec2 normalTowardsOrigin(Vec2 a, Vec2 b)
     {
         // So when will I get a cross product in R^2 haha
@@ -15,6 +27,12 @@ public class MprCollision
         return v.rotateRight90();
     }
 
+    /**
+     * This navigates the ray intersection portal
+     * @param o         A coordinate of intersection
+     * @param a         A coordinate of intersection
+     * @param b         A coordinate of intersection
+     */
     private static boolean rayIntersectPortal(Vec2 o, Vec2 a, Vec2 b)
     {
         Vec2 nb = Vec2.negate(b);
@@ -34,6 +52,12 @@ public class MprCollision
         return false;
     }
 
+    /**
+     * Determines whether or not there was a collision
+     * @param A         The shape of the first game object
+     * @param B         The shape of the second game object
+     * @param m         The math involved in a collision
+     */
     public static boolean collide(IShape A, IShape B, Manifold m)
     {
         int maxIter = 0;

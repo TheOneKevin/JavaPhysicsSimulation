@@ -6,12 +6,25 @@ import oop.simulation.GameObject;
 import oop.simulation.Scene;
 import oop.simulation.math.Vec2;
 
+/**
+ * This is the collision system of the simulation.
+ * It detects when game objects collide with one another
+ *
+ * @author Kai Qi Hao
+ * @author Kevin Dai
+ * @version April 2020
+ */
 import java.util.ArrayList;
 
 public class CollisionSystem
 {
     ArrayList<Manifold> contacts = new ArrayList<>();
 
+    /**
+     * This stores the information of the game objects that are colliding
+     * @param bodies        The game object physics
+     * @param dt            The given number that is assigned to initialize
+     */
     public void collide(ArrayList<Rigidbody2d> bodies, double dt)
     {
         contacts.clear();

@@ -7,6 +7,7 @@ import java.util.Collections;
  * Simple polygon class. Does nothing much other than store some vertices.
  *
  * @author Kevin Dai
+ * @version April 2020
  */
 public class Polygon
 {

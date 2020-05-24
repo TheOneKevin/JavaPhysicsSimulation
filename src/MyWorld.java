@@ -17,6 +17,8 @@ import java.util.Random;
 
 /**
  * Example main world
+ *
+ * @author Everyone
  */
 public class MyWorld extends Scene
 {
@@ -32,6 +34,9 @@ public class MyWorld extends Scene
     private double forceMultiplier = 600; // Multiplier for controller
     private Camera2d cam; // Main camera
 
+    /**
+     * This is the world constructor
+     */
     public MyWorld()
     {
         super(600, 400);
@@ -108,6 +113,9 @@ public class MyWorld extends Scene
         drawUI();
     }
 
+    /**
+     * This draws the user interface onto the scene
+     */
     private void drawUI()
     {
         // New UI context
@@ -321,6 +329,14 @@ public class MyWorld extends Scene
         ctx.getControl("btnFx").Checked.set(true);
     }
 
+    /**
+     * This adds a random circle onto the scene
+     * @param random            Whether or not it is a random circle
+     * @param d                 The density
+     * @param e                 The restitution
+     * @param ms                The static friction
+     * @param mk                The dynamic friction
+     */
     private void addRandomCircle(boolean random, double d, double e, double ms, double mk)
     {
         // Nathan did a poo poo
@@ -328,9 +344,17 @@ public class MyWorld extends Scene
         this.addRandomCircle(random, randomRadius, d, e, ms, mk);
     }
 
+    /**
+     * This adds a random circle onto the scene
+     * @param random            Whether or not it is a random circle
+     * @param r                 The radius
+     * @param d                 The density
+     * @param e                 The restitution
+     * @param ms                The static friction
+     * @param mk                The dynamic friction
+     */
     private void addRandomCircle(boolean random, double r, double d, double e, double ms, double mk)
     {
-        // Nathan did a poo poo
         double randomX = rand.nextDouble() * (getWidth() - 100) + 50;
         double randomY = rand.nextDouble() * (getHeight() - 100) + 50;
         Circle c = new Circle(r);
@@ -353,6 +377,14 @@ public class MyWorld extends Scene
         this.addGameObject(obj);
     }
 
+    /**
+     * This adds a random circle onto the scene
+     * @param random            Whether or not it is a random circle
+     * @param d                 The density
+     * @param e                 The restitution
+     * @param ms                The static friction
+     * @param mk                The dynamic friction
+     */
     private void addRandomPolygon(boolean random, double d, double e, double ms, double mk)
     {
         // Nathan did a poo poo
@@ -438,19 +470,25 @@ public class MyWorld extends Scene
             s.Icon.set(RIconsUI.getIcon(RIconsUI.RIcons.RICON_BOX));
     }
 
+    /**
+     * This sets the instructions for the simulation
+     */
     private void showTitleCard()
     {
         ctx1 = new PicoUI(400, 290, PicoStyleCyber.getInstance());
-        var title = ctx1.new Label("title", "=== Title Goes Here ===");
+        var title = ctx1.new Label("title", "=== Bouncy Code ===");
         title.AutoSizeWidth.set(false);
         title.Width.set(380);
 
         // Text goes here...
-        ctx1.new Label("lbl1", "Line 1                          ");
-        ctx1.new Label("lbl2", "Line 2                          ");
-        ctx1.new Label("lbl3", "Line 3                          ");
-        ctx1.new Label("lbl4", "Line 4                          ");
-        ctx1.new Label("lbl5", "Line 5                          ");
+        ctx1.new Label("lbl1", "Hi welcome to our simulation");
+        ctx1.new Label("lbl2", "In order to access the settings press space");
+        ctx1.new Label("lbl3", "To change how bouncy all the polygons are,");
+        ctx1.new Label("lbl3.5", "enter a new value in restitution");
+        ctx1.new Label("lbl4", "To change the mass of the polygons,");
+        ctx1.new Label("lbl4.5", "enter a new value in mass");
+        ctx1.new Label("lbl5", "Finally press add as many new polygon or");
+        ctx1.new Label("lbl5.5", "circle into the world");
         // Etc...
 
         // Button

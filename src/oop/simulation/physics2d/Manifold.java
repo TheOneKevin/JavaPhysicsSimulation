@@ -4,6 +4,11 @@ import greenfoot.GreenfootSound;
 import oop.simulation.math.Vec2;
 import oop.simulation.math.VecN;
 
+/**
+ * This is the class that determines how a game object will act upon collision
+ *
+ * @author Mustafa M
+ */
 public class Manifold
 {
     protected Rigidbody2d A;
@@ -15,6 +20,11 @@ public class Manifold
 
     private double e, sf, df;
 
+    /**
+     * This is the constructor for the class
+     * @param A         This is the physics given to a game object
+     * @param B         This is the physics given to a game object
+     */
     public Manifold(Rigidbody2d A, Rigidbody2d B)
     {
         this.A = A;
@@ -26,6 +36,10 @@ public class Manifold
         return MprCollision.collide(B.collider, A.collider, this);
     }
 
+    /**
+     * This initializes the physics into the world
+     * @param dt           This is the numerical value used in calculations
+     */
     public void initialize(double dt)
     {
         e = StrictMath.min(A.restitution, B.restitution);
@@ -44,6 +58,9 @@ public class Manifold
         }
     }
 
+    /**
+     * This applies the physics on collision to the game object
+     */
     public void applyImpulse()
     {
         if(PhysicsWorld.equal(A.invMass + B.invMass, 0))

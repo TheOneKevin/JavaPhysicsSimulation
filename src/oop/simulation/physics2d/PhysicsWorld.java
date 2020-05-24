@@ -2,6 +2,14 @@ package oop.simulation.physics2d;
 
 import oop.simulation.math.Vec2;
 
+/**
+ * This class holds the data of the physics
+ * It deals with the gravity of the world and the penetration
+ *
+ * @author Kai Qi
+ * @version March 2020
+ */
+
 public class PhysicsWorld
 {
     public static Vec2 GRAVITY = new Vec2(0.0, -98.1);

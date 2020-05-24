@@ -8,7 +8,6 @@ import java.util.Arrays;
  * "Simple" wrapper around VecN. Some items are reimplemented
  * for speed and extensibility (interop b/w VecN and Vec2).
  *
- * TODO: Fully integrate with VecN at some point in the future.
  *
  * @author Kevin Dai
  */
@@ -16,6 +15,11 @@ public class Vec2 extends VecN {
     public final Property<Double> x = Property.get(() -> this.data[0]).set(v -> this.data[0] = v);
     public final Property<Double> y = Property.get(() -> this.data[1]).set(v -> this.data[1] = v);
 
+    /**
+     * This is the constructor for Vec2
+     * @param x         This determines the x coordinate
+     * @param y         This determines the y coordinate
+     */
     public Vec2(double x, double y) {
         super(x, y);
     }

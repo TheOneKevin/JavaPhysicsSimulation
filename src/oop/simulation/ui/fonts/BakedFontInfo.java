@@ -3,7 +3,11 @@ package oop.simulation.ui.fonts;
 import greenfoot.Font;
 import oop.simulation.beans.Property;
 import oop.simulation.beans.Readonly;
-
+/**
+ * This is the font that can be applied onto the text
+ *
+ * @author Mustafa
+ */
 public class BakedFontInfo
 {
     private Font f;
@@ -15,6 +19,14 @@ public class BakedFontInfo
     public final Readonly<Integer> Ascent = Property.get(() -> ascent).readonly();
     public final Readonly<Integer> Descent = Property.get(() -> descent).readonly();
 
+    /**
+     * The constructor for the class
+     * @param f             The specified font
+     * @param width         The specified width
+     * @param height        The specified height
+     * @param ascent        The specified ascent
+     * @param descent       The specified descent
+     */
     public BakedFontInfo(Font f, int[] width, int height, int ascent, int descent)
     {
         this.f = f;
@@ -24,6 +36,10 @@ public class BakedFontInfo
         this.descent = descent;
     }
 
+    /**
+     * This gets the width of the text
+     * @param s             The specified text
+     */
     public int getStringWidth(String s)
     {
         int w = 0;
@@ -32,6 +48,10 @@ public class BakedFontInfo
         return w;
     }
 
+    /**
+     * Returns the width of the character
+     * @param c           The specified character
+     */
     public int getCharWidth(char c)
     {
         if(c <= 255)
