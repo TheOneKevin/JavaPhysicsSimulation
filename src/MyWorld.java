@@ -481,14 +481,14 @@ public class MyWorld extends Scene
         title.Width.set(380);
 
         // Text goes here...
-        ctx1.new Label("lbl1", "Hi welcome to our simulation");
-        ctx1.new Label("lbl2", "In order to access the settings press space");
-        ctx1.new Label("lbl3", "To change how bouncy all the polygons are,");
-        ctx1.new Label("lbl3.5", "enter a new value in restitution");
-        ctx1.new Label("lbl4", "To change the mass of the polygons,");
-        ctx1.new Label("lbl4.5", "enter a new value in mass");
-        ctx1.new Label("lbl5", "Finally press add as many new polygon or");
-        ctx1.new Label("lbl5.5", "circle into the world");
+        ctx1.new Label("lbl2", "In order to access the menu, press space");
+        ctx1.new Label("lbl5", "The selected rigidbody will be purple.");
+        ctx1.new Label("lbl5.5", "New bodies added will obey set properties.");
+        ctx1.new Label("lbl3", "Change properties of a rigidbody, select");
+        ctx1.new Label("lbl3.5", "that body and press 'apply.'");
+        ctx1.new Label("lbl4", "Use WSAD to control movement of selected");
+        ctx1.new Label("lbl4.5", "body. Use arrows to apply a torque.");
+
         // Etc...
 
         // Button
