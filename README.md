@@ -1,8 +1,6 @@
 # Bouncy Code!
 
-Thanks to the amazing team for their hard work! Here's a screenie:
-
-![](img/Capture.PNG)
+Download to try this out yourself [here](https://github.com/TheOneKevin/JavaPhysicsSimulation/releases/tag/1.0.0).
 
 Try our new space heater application! Run it and it will turn your computer into a nice toasty space heater!
 
@@ -25,3 +23,7 @@ Try our new space heater application! Run it and it will turn your computer into
 - Fast moving objects will pass through walls and disappear.
     - This issue can be solved with a CCD (continuous collision detector). They are not
     trivial to write. Just deal with it.
+
+Thanks to the amazing team for their hard work! Here's a screenie:
+
+![](img/Capture.PNG)
